@@ -35,5 +35,9 @@ alias python=python3
 # https://askubuntu.com/questions/930210/bc-decimal-separator-comma-vs-point
 alias bcl='xmodmap -e "keycode 91 mod2 = KP_Delete period"; bc -l; xmodmap -e "keycode 91 mod2 = KP_Delete comma"'
 
+# Switch to master, pull latest master from origin, switch back to previous branch, MERGE MASTER into.
+# TODO: Implementing `merge_master` as a function not a alias could be cleaner.
+alias merge_master='CB=`git branch --show-current` && git checkout master && git pull && git checkout $CB && git merge master'
+
 
 export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin"
