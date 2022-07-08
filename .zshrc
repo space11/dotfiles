@@ -40,4 +40,4 @@ alias bcl='xmodmap -e "keycode 91 mod2 = KP_Delete period"; bc -l; xmodmap -e "k
 alias merge_master='CB=`git branch --show-current` && git checkout master && git pull && git checkout $CB && git merge master'
 
 
-export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin"
+export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path"
