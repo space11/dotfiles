@@ -29,7 +29,11 @@ alias fd=fdfind
 alias open=xdg-open
 alias front-upco-code="code ~/Projects/Work/front-upco.code-workspace && exit 0"
 alias api-upco-code="code ~/Projects/Work/upco.code-workspace  && exit 0"
+alias backoffice-upco-code="code ~/Projects/Work/backoffice-upco.code-workspace  && exit 0"
 alias python=python3
+alias weather="curl wttr.in/shannon-ireland"
+# List open Ports
+alias lsp="sudo lsof -i -n -P | grep LISTEN"
 
 # bc: decimal separator comma vs. point
 # https://askubuntu.com/questions/930210/bc-decimal-separator-comma-vs-point
