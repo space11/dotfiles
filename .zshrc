@@ -45,3 +45,5 @@ alias merge_master='CB=`git branch --show-current` && git checkout master && git
 
 
 export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path:/usr/local/go/bin"
+fpath=(~/.zsh.d/ $fpath)
+fpath=(~/.zsh.d/ $fpath)
