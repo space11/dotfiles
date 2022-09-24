@@ -43,6 +43,8 @@ alias bcl='xmodmap -e "keycode 91 mod2 = KP_Delete period"; bc -l; xmodmap -e "k
 # TODO: Implementing `merge_master` as a function not a alias could be cleaner.
 alias merge_master='CB=`git branch --show-current` && git checkout master && git pull && git checkout $CB && git merge master'
 
+# nodejs repl
+alias repl="NODE_PATH=$(npm root -g) node ~/dotfiles/repl.js"
 
 export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path:/usr/local/go/bin"
 fpath=(~/.zsh.d/ $fpath)
