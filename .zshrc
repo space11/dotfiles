@@ -34,6 +34,9 @@ alias python=python3
 alias weather="curl wttr.in/shannon-ireland"
 # List open Ports
 alias lsp="sudo lsof -i -n -P | grep LISTEN"
+# pbcopy alias https://garywoodfine.com/use-pbcopy-on-ubuntu/
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 # bc: decimal separator comma vs. point
 # https://askubuntu.com/questions/930210/bc-decimal-separator-comma-vs-point
