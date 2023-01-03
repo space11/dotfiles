@@ -49,6 +49,9 @@ alias merge_master='CB=`git branch --show-current` && git checkout master && git
 # nodejs repl
 alias repl="NODE_PATH=$(npm root -g) node ~/dotfiles/repl.js"
 
+# neoVim without using ~/.vimrc file
+alias nvim="nvim -u NONE"
+
 export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path:/usr/local/go/bin"
 fpath=(~/.zsh.d/ $fpath)
 fpath=(~/.zsh.d/ $fpath)
