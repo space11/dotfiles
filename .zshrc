@@ -24,14 +24,22 @@ fi
 antigen apply
 
 # Custom aliases
-alias start-dev="terminator -l dev -p default"
 alias fd=fdfind
 alias open=xdg-open
-alias front-upco-code="code ~/Projects/Work/front-upco.code-workspace && exit 0"
-alias api-upco-code="code ~/Projects/Work/upco.code-workspace  && exit 0"
-alias backoffice-upco-code="code ~/Projects/Work/backoffice-upco.code-workspace  && exit 0"
 alias python=python3
 alias weather="curl wttr.in/shannon-ireland"
+
+# UpCo aliase
+alias front-upco-code="cd ~/Projects/Work && code ~/Projects/Work/front-upco.code-workspace && exit 0"
+alias api-upco-code="cd ~/Projects/Work && code ~/Projects/Work/api-upco.code-workspace  && exit 0"
+alias backoffice-upco-code="cd ~/Projects/Work && code ~/Projects/Work/backoffice-upco.code-workspace  && exit 0"
+alias serve-api="cd ~/Projects/Work/upco && nx serve api"
+alias serve-backoffice="cd ~/Projects/Work/upco && nx serve backoffice-template --port 4300"
+alias serve-web-pos="cd ~/Projects/Work/upco && nx serve web-pos --port 4200"
+alias serve-web-gift-cards="cd ~/Projects/Work/upco && nx serve web-gift-cards --port 4500"
+alias serve-web-ordering="cd ~/Projects/Work/upco && nx serve web-ordering --port 4400"
+
+
 # List open Ports
 alias lsp="sudo lsof -i -n -P | grep LISTEN"
 # pbcopy alias https://garywoodfine.com/use-pbcopy-on-ubuntu/
