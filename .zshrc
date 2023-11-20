@@ -30,7 +30,7 @@ alias python=python3
 alias weather="curl wttr.in/shannon-ireland"
 
 # UpCo aliase
-alias front-upco-code="cd ~/Projects/Work && code ~/Projects/Work/front-upco.code-workspace && exit 0"
+alias front-upco-code="cd ~/Projects/Work && code ~/Projects/Work/web-apps-upco.code-workspace && exit 0"
 alias api-upco-code="cd ~/Projects/Work && code ~/Projects/Work/api-upco.code-workspace  && exit 0"
 alias backoffice-upco-code="cd ~/Projects/Work && code ~/Projects/Work/backoffice-upco.code-workspace  && exit 0"
 alias serve-api="cd ~/Projects/Work/upco && nx serve api"
@@ -52,14 +52,23 @@ alias bcl='xmodmap -e "keycode 91 mod2 = KP_Delete period"; bc -l; xmodmap -e "k
 
 # Switch to master, pull latest master from origin, switch back to previous branch, MERGE MASTER into.
 # TODO: Implementing `merge_master` as a function not a alias could be cleaner.
-alias merge_master='CB=`git branch --show-current` && git checkout master && git pull && git checkout $CB && git merge master'
+alias merge_dev='CB=`git branch --show-current` && git checkout develop && git pull && git checkout $CB && git merge develop'
 
 # nodejs repl
 alias repl="NODE_PATH=$(npm root -g) node ~/dotfiles/repl.js"
 
 # neoVim without using ~/.vimrc file
-alias nvim="nvim -u NONE"
+#alias nvim="nvim -u NONE"
+alias nv="nvim"
 
-export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path:/usr/local/go/bin"
+export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path:/usr/local/go/bin:/home/borys/go/bin"
 fpath=(~/.zsh.d/ $fpath)
 fpath=(~/.zsh.d/ $fpath)
+
+
+# bun completions
+[ -s "/home/borys/.bun/_bun" ] && source "/home/borys/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

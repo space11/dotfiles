@@ -1,0 +1,31 @@
+06/19/23:17:28:22    Task: refactor contollers and entities
+06/19/23:19:02:45    Task: Refactor next entities and fix controllers
+06/19/23:19:33:04    Task: Fix another entities and controllers
+06/19/23:20:03:24    Task: Test GiftCard controller
+06/19/23:20:43:31    Task: Test merchant-printer-queue controller and crate a PR
+06/20/23:16:58:52    Task: Test fix for bad field error with Andrei M
+06/20/23:18:59:29    Task: Testing Delivery Provider 
+06/20/23:21:02:09    Task: Review all changed entityIDS
+06/20/23:21:32:53    Task: Update PR and branch #3296
+06/20/23:22:03:30    Task: PR fixes for Up 7748 piecloud tighten role component permissions
+06/21/23:15:43:21    Task: work on pr
+06/23/23:08:53:30    Task: RCA reopen table
+06/23/23:09:26:20    Task: Find out saleUnit is undefined for second room
+06/23/23:09:56:45    Task: Fixed reopen table to second room!!
+06/23/23:15:56:59    Task: pr for reopen table
+06/26/23:21:50:53    Task: Crete piecloud-page-menu table
+06/26/23:22:21:26    Task: wip piecloud-page-menu Controller
+06/26/23:22:58:07    Task: 
+06/27/23:16:38:52    Task: document self ref entity
+06/27/23:20:04:27    Task: explore extending menu.ts
+06/27/23:23:06:15    Task: Implement role check for component url
+07/03/23:17:08:51    Task: Workiing on POS falg input refactor
+07/03/23:18:33:10    Task: PR: Up 4974 pos improvements to the table flag functionality #3357
+07/03/23:19:03:38    Task: Gathering info about next stories in a sprint
+07/03/23:20:34:10    Task: Started working on Gift Card transactions details endpoint
+07/03/23:21:04:36    Task: Scaffolding get orderitems by transaction id
+07/03/23:22:17:03    Task: Finish get order items by transaction id
+07/03/23:22:47:22    Task: WIP UI
+07/03/23:23:17:39    Task: UI WIP
+07/04/23:22:16:04    Task: PR for gift Card transaction details
+08/01/23:22:21:45    Task: worked on split table list items
