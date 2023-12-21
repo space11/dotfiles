@@ -1,11 +1,14 @@
 # Use antigen
 source $HOME/.antigen.zsh
 
+ZSH_THEME="gruvbox"
+
 # Use Oh-My-Zsh
 antigen use oh-my-zsh
 
 # Set theme
-antigen theme robbyrussell
+antigen theme gruvbox
+#antigen theme robbyrussell
 
 # Set plugins (plugins not part of Oh-My-Zsh can be installed using githubusername/repo)
 antigen bundle git
@@ -22,6 +25,9 @@ fi
 
 # Apply changes
 antigen apply
+
+# tmux
+alias tmux="TERM=screen-256color-bce tmux"
 
 # Custom aliases
 alias fd=fdfind

@@ -39,3 +39,6 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- vim.cmd("set noshowmode")
+-- vim.cmd("set noshowcmd")
