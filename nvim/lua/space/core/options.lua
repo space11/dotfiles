@@ -40,5 +40,5 @@ opt.splitbelow = true -- split horizontal window to the bottom
 -- turn off swapfile
 opt.swapfile = false
 
--- vim.cmd("set noshowmode")
--- vim.cmd("set noshowcmd")
+-- -- Hide command line when using Lua Line
+-- vim.o.cmdheight = 0

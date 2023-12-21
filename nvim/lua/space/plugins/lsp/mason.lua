@@ -31,14 +31,14 @@ return {
         "lua_ls",
       },
       -- auto-install configured servers (with lspconfig)
-      automatic_installation = true,   -- not the same as ensure_installed
+      automatic_installation = true, -- not the same as ensure_installed
     })
 
     mason_tool_installer.setup({
       ensure_installed = {
-        "prettier",   -- prettier formatter
-        "stylua",     -- lua formatter
-        "eslint_d",   -- js linter
+        "prettier", -- prettier formatter
+        "stylua", -- lua formatter
+        "eslint_d", -- js linter
       },
     })
   end,
