@@ -18,6 +18,7 @@ return {
         },
         -- enable indentation
         indent = { enable = true },
+        auto_install = true,
         -- enable autotagging (w/ nvim-ts-autotag plugin)
         autotag = {
           enable = true,
@@ -33,6 +34,7 @@ return {
           "bash",
           "lua",
           "vim",
+          "vimdoc",
           "dockerfile",
           "gitignore",
         },
@@ -46,7 +48,6 @@ return {
           },
         },
       })
-
       -- enable nvim-ts-context-commentstring plugin for commenting tsx and jsx
       -- require('ts_context_commentstring').setup {}
     end,
