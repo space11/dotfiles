@@ -11,7 +11,7 @@ function M.config()
   local opts = { noremap = true, silent = true }
   require("harpoon").setup {
     menu = {
-      width = vim.api.nvim_win_get_width(0) - 10,
+      width = math.floor(vim.api.nvim_win_get_width(0) * 0.7),
     },
   }
 
