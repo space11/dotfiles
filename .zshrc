@@ -33,7 +33,14 @@ alias tmux="TERM=screen-256color-bce tmux"
 alias fd=fdfind
 alias open=xdg-open
 alias python=python3
-alias weather="curl wttr.in/shannon-ireland"
+
+# My weather station 
+weatherInLocation() {
+  curl wttr.in/"${1:-shannon-ireland}"
+}
+
+alias weather=weatherInLocation
+
 
 # UpCo aliase
 alias front-upco-code="cd ~/Projects/Work && code ~/Projects/Work/web-apps-upco.code-workspace && exit 0"
@@ -78,3 +85,6 @@ fpath=(~/.zsh.d/ $fpath)
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# rust modules
+export PATH="/home/borys/rust_modules/bin:$PATH"
