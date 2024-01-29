@@ -3,6 +3,10 @@ local M = {
   event = "InsertEnter",
   dependencies = {
     {
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      event = "InsertEnter",
+    },
+    {
       "hrsh7th/cmp-nvim-lsp",
       event = "InsertEnter",
     },
@@ -135,14 +139,15 @@ function M.config()
     },
     sources = {
       { name = "copilot" },
+      { name = "cmp_tabnine" },
       { name = "nvim_lsp" },
       { name = "luasnip" },
-      { name = "cmp_tabnine" },
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "path" },
       { name = "calc" },
       { name = "emoji" },
+      { name = "nvim_lsp_signature_help" },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,

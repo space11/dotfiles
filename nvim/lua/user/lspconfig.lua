@@ -53,14 +53,16 @@ function M.config()
     ["<leader>ll"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     ["<leader>lq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
     ["<leader>lr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    ["<C-h"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature" },
+    -- ["<leader>la"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", mode = "v" },
   }
 
-  wk.register {
-    ["<leader>la"] = {
-      name = "LSP",
-      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", mode = "v" },
-    },
-  }
+  -- wk.register {
+  --   ["<leader>la"] = {
+  --     name = "LSP",
+  --     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", mode = "v" },
+  --   },
+  -- }
 
   local lspconfig = require "lspconfig"
   local icons = require "user.icons"
@@ -69,13 +71,13 @@ function M.config()
     "lua_ls",
     "cssls",
     "html",
-    "tsserver",
     "eslint",
     "tsserver",
     "pyright",
     "bashls",
     "jsonls",
     "yamlls",
+    "gopls",
   }
 
   local default_diagnostic_config = {
@@ -115,7 +117,21 @@ function M.config()
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+  --#region
+  vim.lsp.handlers["textDocument/rename"] = function(_, _, result)
+    vim.lsp.util.apply_workspace_edit(result)
+  end
+  ---
   require("lspconfig.ui.windows").default_options.border = "rounded"
+
+  local function organize_imports()
+    local params = {
+      command = "_typescript.organizeImports",
+      arguments = { vim.api.nvim_buf_get_name(0) },
+      title = "",
+    }
+    vim.lsp.buf.execute_command(params)
+  end
 
   for _, server in pairs(servers) do
     local opts = {
@@ -132,6 +148,44 @@ function M.config()
       require("neodev").setup {}
     end
 
+    if server == "gopls" then
+      opts.gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
+      }
+    end
+
+    -- NOTE: Attempt to add editor command to organize imports for typescript files.
+    -- editor command is not added. Not sure why.
+    -- if server == "tsserver" then
+    --   print "TSSERVER"
+    --   local tsopts = {
+    --     on_attach = M.on_attach,
+    --     capabilities = M.common_capabilities(),
+    --     commands = {
+    --       OrganizeImports = {
+    --         organize_imports,
+    --         description = "Organize Imports",
+    --       },
+    --     },
+    --   }
+    --   lspconfig[server].setup(tsopts)
+    -- else
+    -- lspconfig[server].setup(opts)
+    -- end
+
+    if server == "tsserver" then
+      local wk = require "which-key"
+      wk.register {
+        ["<leader>lo"] = {
+          "<cmd>lua vim.lsp.buf.execute_command { command = '_typescript.organizeImports', arguments = { vim.fn.expand '%:p' } }<cr>",
+          "TS Organize Imports",
+        },
+      }
+    end
     lspconfig[server].setup(opts)
   end
 end

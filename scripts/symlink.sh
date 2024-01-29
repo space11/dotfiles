@@ -55,4 +55,10 @@ function linkToConfigDir {
 # linkDotfile .vimrc
 # linkDotfile .zshrc
 # linkDotfile .gitconfig
-linkToConfigDir nvim
+# linkToConfigDir nvim
+
+
+
+
+
+

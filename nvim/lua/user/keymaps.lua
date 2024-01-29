@@ -20,6 +20,10 @@ keymap("n", "*", "*zz", opts)
 keymap("n", "#", "#zz", opts)
 keymap("n", "g*", "g*zz", opts)
 keymap("n", "g#", "g#zz", opts)
+vim.keymap.set("n", "j", "jzz")
+vim.keymap.set("n", "k", "kzz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
@@ -56,13 +60,10 @@ vim.api.nvim_set_keymap("t", "<C-;>", "<C-\\><C-n>", opts)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+
 -- joins the current line with the line below it and move cursor back to its original position
 -- vim.keymap.set("n", "J", "mzJ`z")
 
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
 
 -- This is going to get me cancelled
 vim.keymap.set("i", "<C-c>", "<Esc>")
