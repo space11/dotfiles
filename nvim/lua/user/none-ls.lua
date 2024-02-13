@@ -15,12 +15,17 @@ function M.config()
     debug = false,
     sources = {
       formatting.stylua,
-      formatting.prettier,
+      -- formatting.prettier,
+      formatting.goimports,
+      -- formatting.gofumpt,
+
+      null_ls.builtins.code_actions.gitsigns,
       diagnostics.revive,
-      -- formatting.prettier.with {
-      --   extra_filetypes = { "toml" },
-      --   -- extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-      -- },
+
+      formatting.prettier.with {
+        extra_filetypes = { "toml" },
+        extra_args = { "--single-quote", "--jsx-single-quote" },
+      },
       -- formatting.eslint,
       -- diagnostics.eslint_d,
     },

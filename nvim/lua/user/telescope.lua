@@ -28,7 +28,7 @@ function M.config()
 
   local icons = require "user.icons"
   local actions = require "telescope.actions"
-    -- TODO: check can this work with fzf?
+  -- TODO: check can this work with fzf?
   -- local lga_actions = require "telescope-live-grep-args.actions"
 
   require("telescope").setup {
@@ -59,6 +59,7 @@ function M.config()
 
           ["<C-j>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,
+          ["<C-c>"] = actions.close,
         },
         n = {
           ["<esc>"] = actions.close,
@@ -79,7 +80,8 @@ function M.config()
 
       find_files = {
         theme = "dropdown",
-        previewer = false,
+        previewer = true,
+        hidden = true,
       },
 
       buffers = {
@@ -132,7 +134,7 @@ function M.config()
         override_file_sorter = true, -- override the file sorter
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       },
-    -- TODO: check can this work with fzf?
+      -- TODO: check can this work with fzf?
       -- live_grep_args = {
       --   auto_quoting = true, -- enable/disable auto-quoting
       --   -- define mappings, e.g.

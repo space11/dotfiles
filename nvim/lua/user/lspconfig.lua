@@ -22,9 +22,23 @@ end
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 
+  -- if client.server_capabilities.inlayHintProvider then
+  --   vim.lsp.buf.inlay_hint(bufnr, true)
+  -- end
+  local inspect = require "inspect"
+
   if client.supports_method "textDocument/inlayHint" then
     vim.lsp.inlay_hint.enable(bufnr, true)
   end
+  -- refresh codelens when buffer enters and buffer is saved
+  -- InsertLeave TextChanged
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePre" }, {
+    buffer = bufnr,
+    callback = vim.lsp.codelens.refresh,
+  })
+
+  -- trigger code lens
+  vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
 end
 
 function M.common_capabilities()
@@ -53,20 +67,13 @@ function M.config()
     ["<leader>ll"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     ["<leader>lq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
     ["<leader>lr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-    ["<C-h"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature" },
-    -- ["<leader>la"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", mode = "v" },
+    -- ["<C-h"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature" },
   }
-
-  -- wk.register {
-  --   ["<leader>la"] = {
-  --     name = "LSP",
-  --     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", mode = "v" },
-  --   },
-  -- }
 
   local lspconfig = require "lspconfig"
   local icons = require "user.icons"
 
+  vim.filetype.add { extension = { templ = "templ" } }
   local servers = {
     "lua_ls",
     "cssls",
@@ -78,6 +85,7 @@ function M.config()
     "jsonls",
     "yamlls",
     "gopls",
+    "templ",
   }
 
   local default_diagnostic_config = {
@@ -118,9 +126,10 @@ function M.config()
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
   --#region
-  vim.lsp.handlers["textDocument/rename"] = function(_, _, result)
-    vim.lsp.util.apply_workspace_edit(result)
-  end
+  -- Some how this is duplicating other code - but could not find the duplication
+  -- vim.lsp.handlers["textDocument/rename"] = function(_, _, result)
+  --   vim.lsp.util.apply_workspace_edit(result, "utf-16")
+  -- end
   ---
   require("lspconfig.ui.windows").default_options.border = "rounded"
 
@@ -178,6 +187,7 @@ function M.config()
     -- end
 
     if server == "tsserver" then
+      opts.capabilities.offsetEncoding = { "utf-8" }
       local wk = require "which-key"
       wk.register {
         ["<leader>lo"] = {
@@ -188,6 +198,41 @@ function M.config()
     end
     lspconfig[server].setup(opts)
   end
+
+  -- @server angular-language-server
+  local mason_packages = vim.fn.stdpath "data" .. "/mason/packages"
+  local angular_language_server_path = mason_packages .. "/angular-language-server/node_modules/.bin/ngserver"
+  local typescript_language_server_path = mason_packages .. "/typescript-language-server/node_modules/.bin/tsserver"
+  local anigular_logs_path = vim.fn.stdpath "state" .. "/angularls.log"
+  local node_modules_global_path = "/usr/local/lib/node_modules"
+
+  local ngls_cmd = {
+    -- "node",
+    angular_language_server_path,
+    "--stdio",
+    "--tsProbeLocations",
+    typescript_language_server_path,
+    "--ngProbeLocations",
+    node_modules_global_path,
+    "--includeCompletionsWithSnippetText",
+    "--includeAutomaticOptionalChainCompletions",
+    "--logToConsole",
+    "--logFile",
+    anigular_logs_path,
+  }
+  local opts = {
+    on_attach = M.on_attach,
+    capabilities = M.common_capabilities(),
+  }
+
+  lspconfig.angularls.setup {
+    cmd = ngls_cmd,
+    on_attach = opts.on_attach,
+    capabilities = opts.capabilities,
+    on_new_config = function(new_config, _)
+      new_config.cmd = ngls_cmd
+    end,
+  }
 end
 
 return M
