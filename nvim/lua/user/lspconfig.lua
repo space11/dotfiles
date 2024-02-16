@@ -25,7 +25,6 @@ M.on_attach = function(client, bufnr)
   -- if client.server_capabilities.inlayHintProvider then
   --   vim.lsp.buf.inlay_hint(bufnr, true)
   -- end
-  local inspect = require "inspect"
 
   if client.supports_method "textDocument/inlayHint" then
     vim.lsp.inlay_hint.enable(bufnr, true)
@@ -80,6 +79,7 @@ function M.config()
     "html",
     "eslint",
     "tsserver",
+    "marksman",
     "pyright",
     "bashls",
     "jsonls",
@@ -167,27 +167,8 @@ function M.config()
       }
     end
 
-    -- NOTE: Attempt to add editor command to organize imports for typescript files.
-    -- editor command is not added. Not sure why.
-    -- if server == "tsserver" then
-    --   print "TSSERVER"
-    --   local tsopts = {
-    --     on_attach = M.on_attach,
-    --     capabilities = M.common_capabilities(),
-    --     commands = {
-    --       OrganizeImports = {
-    --         organize_imports,
-    --         description = "Organize Imports",
-    --       },
-    --     },
-    --   }
-    --   lspconfig[server].setup(tsopts)
-    -- else
-    -- lspconfig[server].setup(opts)
-    -- end
-
     if server == "tsserver" then
-      opts.capabilities.offsetEncoding = { "utf-8" }
+      opts.capabilities.offsetEncoding = { "utf-16" }
       local wk = require "which-key"
       wk.register {
         ["<leader>lo"] = {
@@ -198,41 +179,6 @@ function M.config()
     end
     lspconfig[server].setup(opts)
   end
-
-  -- @server angular-language-server
-  local mason_packages = vim.fn.stdpath "data" .. "/mason/packages"
-  local angular_language_server_path = mason_packages .. "/angular-language-server/node_modules/.bin/ngserver"
-  local typescript_language_server_path = mason_packages .. "/typescript-language-server/node_modules/.bin/tsserver"
-  local anigular_logs_path = vim.fn.stdpath "state" .. "/angularls.log"
-  local node_modules_global_path = "/usr/local/lib/node_modules"
-
-  local ngls_cmd = {
-    -- "node",
-    angular_language_server_path,
-    "--stdio",
-    "--tsProbeLocations",
-    typescript_language_server_path,
-    "--ngProbeLocations",
-    node_modules_global_path,
-    "--includeCompletionsWithSnippetText",
-    "--includeAutomaticOptionalChainCompletions",
-    "--logToConsole",
-    "--logFile",
-    anigular_logs_path,
-  }
-  local opts = {
-    on_attach = M.on_attach,
-    capabilities = M.common_capabilities(),
-  }
-
-  lspconfig.angularls.setup {
-    cmd = ngls_cmd,
-    on_attach = opts.on_attach,
-    capabilities = opts.capabilities,
-    on_new_config = function(new_config, _)
-      new_config.cmd = ngls_cmd
-    end,
-  }
 end
 
 return M

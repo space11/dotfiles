@@ -5,11 +5,17 @@ local M = {
 
 function M.config()
   require("oil").setup {
-    float = {
-      max_height = 40,
-      max_width = 80,
+    lsp_rename_autosave = "unmodified",
+    -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
+    delete_to_trash = true,
+    skip_confirm_for_simple_edits = true,
+    -- Constrain the cursor to the editable parts of the oil buffer
+    -- Set to `false` to disable, or "name" to keep it on the file names
+    constrain_cursor = "name",
+    view_options = {
+      -- Show files and directories that start with "."
+      show_hidden = true,
     },
-    lsp_rename_autosave = "unmodified"
   }
   vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 end
