@@ -68,7 +68,7 @@ alias bcl='xmodmap -e "keycode 91 mod2 = KP_Delete period"; bc -l; xmodmap -e "k
 alias merge_dev='CB=`git branch --show-current` && git checkout develop && git pull && git checkout $CB && git merge develop'
 
 # nodejs repl
-alias repl="NODE_PATH=$(npm root -g) node ~/dotfiles/repl.js"
+# alias repl="NODE_PATH=$(npm root -g) node ~/dotfiles/repl.js"
 
 # neoVim without using ~/.vimrc file
 #alias nvim="nvim -u NONE"
@@ -88,3 +88,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # rust modules
 export PATH="/home/borys/rust_modules/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
