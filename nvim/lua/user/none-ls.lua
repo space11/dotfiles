@@ -31,7 +31,7 @@ function M.config()
         extra_args = { "--single-quote", "--jsx-single-quote" },
       },
       -- formatting.eslint,
-      diagnostics.eslint.with {
+      diagnostics.eslint_d.with {
         condition = function(utils)
           local v = utils.root_has_file { ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs" }
           print(v)
