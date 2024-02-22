@@ -23,7 +23,7 @@ function M.config()
 
       null_ls.builtins.code_actions.gitsigns,
       diagnostics.revive,
-      competition.spell,
+      -- competition.spell,
       actions.gomodifytags, -- Go tool to modify struct field tag
       diagnostics.codespell,
       formatting.prettier.with {
