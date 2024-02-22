@@ -22,9 +22,9 @@ end
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 
-  -- if client.server_capabilities.inlayHintProvider then
-  --   vim.lsp.buf.inlay_hint(bufnr, true)
-  -- end
+  if client.server_capabilities.inlayHintProvider then
+    vim.lsp.buf.inlay_hint(bufnr, true)
+  end
 
   if client.supports_method "textDocument/inlayHint" then
     vim.lsp.inlay_hint.enable(bufnr, true)
@@ -77,7 +77,6 @@ function M.config()
     "lua_ls",
     "cssls",
     "html",
-    "eslint",
     "tsserver",
     "marksman",
     "pyright",
@@ -99,11 +98,6 @@ function M.config()
       },
     },
     virtual_text = false,
-    -- virtual_text = {
-    --   spacing = 7,
-    --   -- language server name
-    --   source = "always",
-    -- },
     update_in_insert = false,
     underline = true,
     severity_sort = true,
@@ -125,22 +119,8 @@ function M.config()
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-  --#region
-  -- Some how this is duplicating other code - but could not find the duplication
-  -- vim.lsp.handlers["textDocument/rename"] = function(_, _, result)
-  --   vim.lsp.util.apply_workspace_edit(result, "utf-16")
-  -- end
-  ---
-  require("lspconfig.ui.windows").default_options.border = "rounded"
 
-  local function organize_imports()
-    local params = {
-      command = "_typescript.organizeImports",
-      arguments = { vim.api.nvim_buf_get_name(0) },
-      title = "",
-    }
-    vim.lsp.buf.execute_command(params)
-  end
+  require("lspconfig.ui.windows").default_options.border = "rounded"
 
   for _, server in pairs(servers) do
     local opts = {
@@ -167,16 +147,6 @@ function M.config()
       }
     end
 
-    --    if server == "tsserver" then
-    --      opts.capabilities.offsetEncoding = { "utf-16" }
-    --      local wk = require "which-key"
-    --      wk.register {
-    --        ["<leader>lo"] = {
-    --          "<cmd>lua vim.lsp.buf.execute_command { command = '_typescript.organizeImports', arguments = { vim.fn.expand '%:p' } }<cr>",
-    --          "TS Organize Imports",
-    --        },
-    --      }
-    --    end
     lspconfig[server].setup(opts)
   end
 end
