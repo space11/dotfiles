@@ -1,6 +1,6 @@
 local M = {
   "nvim-neotest/neotest",
-  lazu = true,
+  lazy = true,
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
     -- general tests
