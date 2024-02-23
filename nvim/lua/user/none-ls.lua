@@ -34,8 +34,8 @@ function M.config()
       diagnostics.eslint_d.with {
         condition = function(utils)
           local v = utils.root_has_file { ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs" }
-          print(v)
-          return v
+          -- return v
+          return false
         end,
       },
     },

@@ -38,7 +38,7 @@ function M.config()
       entry_prefix = "   ",
       initial_mode = "insert",
       selection_strategy = "reset",
-      path_display = { "smart" },
+      path_display = { "truncate" },
       color_devicons = true,
       vimgrep_arguments = {
         "rg",
