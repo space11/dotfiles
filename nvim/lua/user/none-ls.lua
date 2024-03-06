@@ -30,14 +30,15 @@ function M.config()
         extra_filetypes = { "toml" },
         extra_args = { "--single-quote", "--jsx-single-quote" },
       },
+      -- deleted , deprecated builtins 
       -- formatting.eslint,
-      diagnostics.eslint_d.with {
-        condition = function(utils)
-          local v = utils.root_has_file { ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs" }
-          -- return v
-          return false
-        end,
-      },
+      -- diagnostics.eslint_d.with {
+      --   condition = function(utils)
+      --     local v = utils.root_has_file { ".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs" }
+      --     -- return v
+      --     return false
+      --   end,
+      -- },
     },
   }
 end

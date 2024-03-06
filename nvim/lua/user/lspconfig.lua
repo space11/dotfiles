@@ -12,10 +12,11 @@ local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>zz", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  keymap(bufnr, "n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 end
 
@@ -58,7 +59,7 @@ function M.config()
     ["<leader>lf"] = {
       "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
       "Format",
-      { mode = { "n", "v" } },
+      mode = { "n", "v" },
     },
     ["<leader>li"] = { "<cmd>LspInfo<cr>", "Info" },
     ["<leader>lj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
@@ -86,6 +87,8 @@ function M.config()
     "yamlls",
     "gopls",
     "templ",
+    "htmx",
+    "tailwindcss",
   }
 
   local default_diagnostic_config = {
@@ -145,6 +148,24 @@ function M.config()
         },
         staticcheck = true,
         gofumpt = true,
+      }
+    end
+
+    if server == "html" then
+      opts.html = {
+        filetypes = { "html", "templ" },
+      }
+    end
+
+    if server == "htmx" then
+      opts.htmx = {
+        filetypes = { "html", "templ" },
+      }
+    end
+    if server == "tailwindcss" then
+      opts.tailwindcss = {
+        filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+        init_options = { userLanguages = { templ = "html" } },
       }
     end
 
