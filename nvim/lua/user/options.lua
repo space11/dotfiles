@@ -45,6 +45,8 @@ vim.opt.fillchars = vim.opt.fillchars + "eob: "
 vim.opt.fillchars:append {
   stl = " ",
 }
+-- Work around for golden_size plugin. https://github.com/dm1try/golden_size/issues/3 , https://github.com/dm1try/golden_size/pull/5
+vim.opt.winminwidth = 15
 
 vim.opt.shortmess:append "c"
 

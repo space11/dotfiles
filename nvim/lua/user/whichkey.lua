@@ -9,14 +9,15 @@ function M.config()
     ["`"] = { "<cmd>tabnew | terminal<CR>", "Term" },
     v = { "<cmd>vsplit<CR>", "Vertical Split" },
     s = { "<cmd>split<CR>", "Horizontal Split" },
+    x = { name = "Trouble" },
     b = { name = "Buffers" },
     d = { name = "Debug" },
     f = { name = "Find" },
     g = { name = "Git" },
     l = { name = "LSP" },
     p = { name = "Plugins" },
-    t = { name = "Test" },
-    a = {
+    -- t = { name = "Test" },
+    t = {
       name = "Tab",
       n = { "<cmd>$tabnew<cr>", "New Empty Tab" },
       N = { "<cmd>tabnew %<cr>", "New Tab" },
@@ -24,7 +25,7 @@ function M.config()
       h = { "<cmd>-tabmove<cr>", "Move Left" },
       l = { "<cmd>+tabmove<cr>", "Move Right" },
     },
-    T = { name = "Treesitter" },
+    -- T = { name = "Treesitter" },
   }
 
   local which_key = require "which-key"
