@@ -51,6 +51,7 @@ function M.config()
   vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
   vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
   vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
+  vim.api.nvim_set_hl(0, "CmpItemKindCody", { fg = "Red" })
 
   local check_backspace = function()
     local col = vim.fn.col "." - 1
@@ -66,6 +67,14 @@ function M.config()
       end,
     },
     mapping = cmp.mapping.preset.insert {
+      -- Manually trigger cody completions
+      ["<c-a>"] = cmp.mapping.complete {
+        config = {
+          sources = {
+            { name = "cody" },
+          },
+        },
+      },
       ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
       ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
       ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
@@ -116,12 +125,13 @@ function M.config()
       format = function(entry, vim_item)
         vim_item.kind = icons.kind[vim_item.kind]
         vim_item.menu = ({
-          nvim_lsp = "",
+          nvim_lsp = "[LSP]",
           nvim_lua = "",
           luasnip = "",
           buffer = "",
           path = "",
           emoji = "",
+          coddy = "[coddy]",
         })[entry.source.name]
 
         if entry.source.name == "emoji" then
@@ -138,8 +148,9 @@ function M.config()
       end,
     },
     sources = {
-      { name = "copilot" },
-      { name = "cmp_tabnine" },
+      { name = "cody" },
+      -- { name = "copilot" },
+      -- { name = "cmp_tabnine" },
       { name = "nvim_lsp" },
       { name = "luasnip" },
       { name = "nvim_lua" },

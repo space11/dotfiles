@@ -27,10 +27,14 @@ function M.config()
       actions.gomodifytags, -- Go tool to modify struct field tag
       diagnostics.codespell,
       formatting.prettier.with {
-        extra_filetypes = { "toml" },
+        -- dynamic_command = function()
+        --   return "prettier"
+        -- end,
+        prefer_local = "node_modules/.bin",
+        filetypes = { "html", "json", "yaml", "markdown" },
         extra_args = { "--single-quote", "--jsx-single-quote" },
       },
-      -- deleted , deprecated builtins 
+      -- deleted , deprecated builtins
       -- formatting.eslint,
       -- diagnostics.eslint_d.with {
       --   condition = function(utils)

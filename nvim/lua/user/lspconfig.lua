@@ -41,7 +41,7 @@ M.on_attach = function(client, bufnr)
   vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
 end
 
-function M.common_capabilities()
+local function common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   return capabilities
@@ -129,7 +129,7 @@ function M.config()
   for _, server in pairs(servers) do
     local opts = {
       on_attach = M.on_attach,
-      capabilities = M.common_capabilities(),
+      capabilities = common_capabilities(),
     }
 
     local require_ok, settings = pcall(require, "user.lspsettings." .. server)
