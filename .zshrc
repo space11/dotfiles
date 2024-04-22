@@ -27,7 +27,7 @@ fi
 antigen apply
 
 # tmux
-alias tmux="TERM=screen-256color-bce tmux"
+alias tmux="nvm use 18.18.0; TERM=screen-256color-bce tmux"
 
 # Custom aliases
 alias fd=fdfind
@@ -72,7 +72,7 @@ alias merge_dev='CB=`git branch --show-current` && git checkout develop && git p
 
 # neoVim without using ~/.vimrc file
 #alias nvim="nvim -u NONE"
-alias nv="nvim"
+alias nv="nvm use 18.18.0; nvim"
 
 export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path:/usr/local/go/bin:/home/borys/go/bin"
 fpath=(~/.zsh.d/ $fpath)
@@ -90,5 +90,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/home/borys/rust_modules/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
