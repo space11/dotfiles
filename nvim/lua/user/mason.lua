@@ -16,7 +16,8 @@ function M.config()
     "bashls",
     "jsonls",
     "marksman",
-    "angularls"
+    "angularls",
+    -- "js-debug-adapter"
   }
 
   require("mason").setup {

@@ -48,10 +48,8 @@ function M.config()
   local luasnip = require "luasnip"
   require("luasnip/loaders/from_vscode").lazy_load()
 
-  vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-  vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
+  vim.api.nvim_set_hl(0, "CmpItemKindCody", { fg = "#8D3BCD" })
   vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
-  vim.api.nvim_set_hl(0, "CmpItemKindCody", { fg = "Red" })
 
   local check_backspace = function()
     local col = vim.fn.col "." - 1
@@ -89,36 +87,36 @@ function M.config()
       -- Accept currently selected item. If none selected, `select` first item.
       -- Set `select` to `false` to only confirm explicitly selected items.
       ["<CR>"] = cmp.mapping.confirm { select = true },
-      ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif luasnip.expandable() then
-          luasnip.expand()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        elseif check_backspace() then
-          fallback()
-          -- require("neotab").tabout()
-        else
-          fallback()
-          -- require("neotab").tabout()
-        end
-      end, {
-        "i",
-        "s",
-      }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, {
-        "i",
-        "s",
-      }),
+      -- ["<Tab>"] = cmp.mapping(function(fallback)
+      --   if cmp.visible() then
+      --     cmp.select_next_item()
+      --   elseif luasnip.expandable() then
+      --     luasnip.expand()
+      --   elseif luasnip.expand_or_jumpable() then
+      --     luasnip.expand_or_jump()
+      --   elseif check_backspace() then
+      --     fallback()
+      --     -- require("neotab").tabout()
+      --   else
+      --     fallback()
+      --     -- require("neotab").tabout()
+      --   end
+      -- end, {
+      --   "i",
+      --   "s",
+      -- }),
+      -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+      --   if cmp.visible() then
+      --     cmp.select_prev_item()
+      --   elseif luasnip.jumpable(-1) then
+      --     luasnip.jump(-1)
+      --   else
+      --     fallback()
+      --   end
+      -- end, {
+      --   "i",
+      --   "s",
+      -- }),
     },
     formatting = {
       fields = { "kind", "abbr", "menu" },
@@ -131,7 +129,8 @@ function M.config()
           buffer = "",
           path = "",
           emoji = "",
-          coddy = "[coddy]",
+          spell = "[SPELL]",
+          cody = "[CODY]",
         })[entry.source.name]
 
         if entry.source.name == "emoji" then
@@ -139,9 +138,9 @@ function M.config()
           vim_item.kind_hl_group = "CmpItemKindEmoji"
         end
 
-        if entry.source.name == "cmp_tabnine" then
+        if entry.source.name == "cody" then
           vim_item.kind = icons.misc.Robot
-          vim_item.kind_hl_group = "CmpItemKindTabnine"
+          vim_item.kind_hl_group = "CmpItemKindCody"
         end
 
         return vim_item

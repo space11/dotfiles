@@ -1,5 +1,6 @@
 local M = {
   "tpope/vim-fugitive",
+  event = "VeryLazy",
   config = function()
     local wk = require "which-key"
 

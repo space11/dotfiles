@@ -1,5 +1,6 @@
 local M = {
   "eandrju/cellular-automaton.nvim",
+  event = "VeryLazy",
 }
 
 function M.config()

@@ -1,6 +1,7 @@
 -- LSP code context displayd in statusline / winbar
 local M = {
   "SmiteshP/nvim-navic",
+  event = "VeryLazy",
 }
 
 function M.config()
