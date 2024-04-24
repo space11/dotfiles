@@ -1,13 +1,36 @@
 # Use antigen
 source $HOME/.antigen.zsh
 
-ZSH_THEME="gruvbox"
 
+# Setup shell history
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+HISTORY_IGNORE="(ls|pwd|exit)*"
+
+# https://zsh.sourceforge.io/Doc/Release/Options.html (16.2.4 History)
+setopt EXTENDED_HISTORY      # Write the history file in the ':start:elapsed;command' format.
+setopt INC_APPEND_HISTORY    # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY         # Share history between all sessions.
+setopt APPEND_HISTORY        # append to history file (Default)
+setopt HIST_IGNORE_DUPS      # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS  # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_IGNORE_SPACE     # Do not record an event starting with a space.
+setopt HIST_SAVE_NO_DUPS     # Do not write a duplicate event to the history file.
+setopt HIST_VERIFY           # Do not execute immediately upon history expansion.
+setopt HIST_NO_STORE         # Don't store history commands
+setopt HIST_REDUCE_BLANKS    # Remove superfluous blanks from each command line being added to the history.
+setopt HIST_FIND_NO_DUPS     # Do not display a previously found event.
+setopt HIST_EXPIRE_DUPS_FIRST # Expire a duplicate event first when trimming history.
+
+# ZSH_THEME="gruvbox"
+#
 # Use Oh-My-Zsh
 antigen use oh-my-zsh
 
 # Set theme
-antigen theme gruvbox
+# antigen theme gruvbox
 #antigen theme robbyrussell
 
 # Set plugins (plugins not part of Oh-My-Zsh can be installed using githubusername/repo)
@@ -42,7 +65,7 @@ weatherInLocation() {
 alias weather=weatherInLocation
 
 
-# UpCo aliase
+# UpCo aliases
 alias front-upco-code="cd ~/Projects/Work && code ~/Projects/Work/web-apps-upco.code-workspace && exit 0"
 alias api-upco-code="cd ~/Projects/Work && code ~/Projects/Work/api-upco.code-workspace  && exit 0"
 alias backoffice-upco-code="cd ~/Projects/Work && code ~/Projects/Work/backoffice-upco.code-workspace  && exit 0"
