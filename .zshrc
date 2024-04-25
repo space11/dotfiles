@@ -1,8 +1,38 @@
-# Use antigen
-source $HOME/.antigen.zsh
+source ~/.antigen/antigen.zsh
+# Load Antigen configurations
+antigen init ~/.antigenrc
+# source $HOME/.antigen.zsh
 
-
+# ZSH_THEME="gruvbox"
+# #
+# # Use Oh-My-Zsh
+# antigen use oh-my-zsh
+#
+# # Set theme
+# # antigen theme gruvbox
+# #antigen theme robbyrussell
+#
+# # Set plugins (plugins not part of Oh-My-Zsh can be installed using githubusername/repo)
+# antigen bundle git
+# # antigen bundle zsh-users/zsh-autosuggestions
+# # antigen bundle zsh-users/zsh-completions
+# # antigen bundle zsh-users/zsh-syntax-highlighting
+# antigen bundle agkozak/zsh-z
+# antigen bundle joshskidmore/zsh-fzf-history-search
+# # antigen bundle zdharma-continuum/fast-syntax-highlighting
+# # antigen bundle djui/alias-tips
+# # antigen bundle node
+# # antigen bundle npm
+#
+# if [[ "$OSTYPE" == "darwin"* ]]; then
+#     antigen bundle osx
+# fi
+#
+# # Apply changes
+# antigen apply
+# Load Antigen
 # Setup shell history
+
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -23,32 +53,6 @@ setopt HIST_NO_STORE         # Don't store history commands
 setopt HIST_REDUCE_BLANKS    # Remove superfluous blanks from each command line being added to the history.
 setopt HIST_FIND_NO_DUPS     # Do not display a previously found event.
 setopt HIST_EXPIRE_DUPS_FIRST # Expire a duplicate event first when trimming history.
-
-# ZSH_THEME="gruvbox"
-#
-# Use Oh-My-Zsh
-antigen use oh-my-zsh
-
-# Set theme
-# antigen theme gruvbox
-#antigen theme robbyrussell
-
-# Set plugins (plugins not part of Oh-My-Zsh can be installed using githubusername/repo)
-antigen bundle git
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle agkozak/zsh-z
-antigen bundle joshskidmore/zsh-fzf-history-search
-
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    antigen bundle osx
-fi
-
-# Apply changes
-antigen apply
-
 # tmux
 alias tmux="nvm use 18.18.0; TERM=screen-256color-bce tmux"
 
@@ -75,7 +79,9 @@ alias serve-web-pos="cd ~/Projects/Work/upco && nx serve web-pos --port 4200"
 alias serve-web-gift-cards="cd ~/Projects/Work/upco && nx serve web-gift-cards --port 4500"
 alias serve-web-ordering="cd ~/Projects/Work/upco && nx serve web-ordering --port 4400"
 
-
+# list grep
+alias l="ls -lahCF"
+alias lg="ls -lahCF | grep"
 # List open Ports
 alias lsp="sudo lsof -i -n -P | grep LISTEN"
 # pbcopy alias https://garywoodfine.com/use-pbcopy-on-ubuntu/
@@ -100,6 +106,7 @@ alias nv="nvm use 18.18.0; nvim"
 export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path:/usr/local/go/bin:/home/borys/go/bin"
 fpath=(~/.zsh.d/ $fpath)
 fpath=(~/.zsh.d/ $fpath)
+source $HOME/.zsh.d/z.sh
 
 
 # bun completions
