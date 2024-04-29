@@ -2,7 +2,10 @@ local M = {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-    { "ThePrimeagen/refactoring.nvim", lazy = true },
+    -- { "ThePrimeagen/refactoring.nvim", lazy = true },
+    {
+      "LukasPietzschmann/telescope-tabs",
+    },
     -- TODO: check can this work with fzf?
     -- {
     --   "nvim-telescope/telescope-live-grep-args.nvim",
@@ -26,13 +29,20 @@ function M.config()
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
     ["<leader>fs"] = { "<cmd>Telescope  lsp_document_symbols<cr>", "LSP Document Symbols" },
-    ["<leader>rr"] = {
+    ["<tab>"] = {
       function()
-        require("telescope").extensions.refactoring.refactors()
+        require("telescope-tabs").list_tabs()
       end,
-      "Refactor",
-      mode = { "x" },
+      "Telescope Tabs",
+      mode = { "n" },
     },
+    -- ["<leader>rr"] = {
+    --   function()
+    --     require("telescope").extensions.refactoring.refactors()
+    --   end,
+    --   "Refactor",
+    --   mode = { "x" },
+    -- },
   }
 
   local icons = require "user.icons"
