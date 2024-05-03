@@ -115,7 +115,7 @@ alias tmux="nvm use 18.18.0; TERM=screen-256color-bce tmux"
 
 # My weather station 
 weatherInLocation() {
-  curl wttr.in/"${1:shannon-ireland}"
+  curl wttr.in/"${1:-shannon-ireland}"
 }
 
 # Custom aliases
