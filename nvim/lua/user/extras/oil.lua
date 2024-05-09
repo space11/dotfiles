@@ -6,13 +6,13 @@ local M = {
 
 function M.config()
   require("oil").setup {
-  lsp_file_methods = {
-    -- Time to wait for LSP file operations to complete before skipping
-    timeout_ms = 1000,
-    -- Set to true to autosave buffers that are updated with LSP willRenameFiles
-    -- Set to "unmodified" to only save unmodified buffers
-    autosave_changes = "unmodified",
-  },
+    lsp_file_methods = {
+      -- Time to wait for LSP file operations to complete before skipping
+      timeout_ms = 1000,
+      -- Set to true to autosave buffers that are updated with LSP willRenameFiles
+      -- Set to "unmodified" to only save unmodified buffers
+      autosave_changes = "unmodified",
+    },
     -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
     delete_to_trash = true,
     skip_confirm_for_simple_edits = true,
@@ -24,8 +24,7 @@ function M.config()
       show_hidden = true,
     },
   }
-  vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
-  -- vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+  vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 end
 
 return M
