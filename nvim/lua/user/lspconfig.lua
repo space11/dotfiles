@@ -90,6 +90,7 @@ function M.config()
     "htmx",
     "tailwindcss",
     "angularls",
+    "clangd",
   }
 
   local default_diagnostic_config = {
