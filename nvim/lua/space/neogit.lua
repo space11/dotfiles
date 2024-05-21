@@ -4,7 +4,7 @@
 -- }
 --
 -- function M.config()
---   local icons = require "user.icons"
+--   local icons = require "space.icons"
 --   local wk = require "which-key"
 --   wk.register {
 --     ["<leader>gg"] = { "<cmd>Neogit<CR>", "Neogit" },

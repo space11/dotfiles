@@ -29,7 +29,7 @@ function M.config()
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
     ["<leader>fs"] = { "<cmd>Telescope  lsp_document_symbols<cr>", "LSP Document Symbols" },
-    ["<tab>"] = {
+    ["T"] = {
       function()
         require("telescope-tabs").list_tabs()
       end,
@@ -45,7 +45,7 @@ function M.config()
     -- },
   }
 
-  local icons = require "user.icons"
+  local icons = require "space.icons"
   local actions = require "telescope.actions"
   -- TODO: check can this work with fzf?
   -- local lga_actions = require "telescope-live-grep-args.actions"
