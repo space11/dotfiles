@@ -29,7 +29,7 @@ function M.config()
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
     ["<leader>fs"] = { "<cmd>Telescope  lsp_document_symbols<cr>", "LSP Document Symbols" },
-    ["T"] = {
+    ["<C-t>"] = {
       function()
         require("telescope-tabs").list_tabs()
       end,

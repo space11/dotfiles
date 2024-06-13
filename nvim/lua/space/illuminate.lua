@@ -1,4 +1,4 @@
--- Neovim plugin for automatically highlighting other uses of the word under 
+-- Neovim plugin for automatically highlighting other uses of the word under
 -- the cursor using either LSP, Tree-sitter, or regex matching.
 local M = {
   "RRethy/vim-illuminate",

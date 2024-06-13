@@ -26,7 +26,7 @@ function M.config()
         dynamic_command = function()
           return "prettier"
         end,
-        filetypes = { "html", "json", "yaml", "markdown", "javascript", "typescript", "svelte", "vue" },
+        filetypes = { "json", "yaml", "markdown", "javascript", "typescript", "svelte", "vue" },
         extra_args = { "--single-quote", "--jsx-single-quote", "--print-widh 80" },
       },
       formatting.shfmt,
@@ -36,7 +36,8 @@ function M.config()
       actions.gomodifytags, -- Go tool to modify struct field tag
       -- competition.spell,
       diagnostics.codespell.with { filetypes = {} },
-      diagnostics.markdownlint,
+      -- todo: need to figure out what executable to install on ubuntu.
+      -- diagnostics.markdownlint,
     },
   }
 end

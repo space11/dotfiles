@@ -81,7 +81,6 @@ function M.config()
     "html",
     "tsserver",
     "marksman",
-    "pyright",
     "bashls",
     "jsonls",
     "yamlls",
@@ -89,7 +88,7 @@ function M.config()
     "templ",
     "htmx",
     "tailwindcss",
-    "angularls",
+    -- "angularls",
     "clangd",
   }
 
@@ -161,18 +160,27 @@ function M.config()
 
     if server == "htmx" then
       opts.htmx = {
-        filetypes = { "html", "templ" },
+        -- filetypes = { "html", "templ" },
+        filetypes = { "templ" },
       }
     end
+
     if server == "tailwindcss" then
       opts.tailwindcss = {
-        filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+        filetypes = { "templ", "react", "html", "angular.html" },
         init_options = { userLanguages = { templ = "html" } },
       }
     end
 
     lspconfig[server].setup(opts)
   end
+
+  -- Setup angularls separately
+  lspconfig.angularls.setup {
+    filetypes = { "typescript", "typescriptreact", "angular.html" },
+    on_attach = M.on_attach,
+    capabilities = common_capabilities(),
+  }
 end
 
 return M

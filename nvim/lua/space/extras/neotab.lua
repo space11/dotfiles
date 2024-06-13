@@ -22,7 +22,7 @@ function M.config()
       enabled = false,
       semicolon = {
         enabled = false,
-        ft = { "cs", "c", "cpp", "java" },
+        ft = { "cs", "c", "cpp", "java", "ts", "js" },
       },
       escape = {
         enabled = false,
