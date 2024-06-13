@@ -80,7 +80,6 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle joshskidmore/zsh-fzf-history-search
 antigen bundle agkozak/zsh-z
-antigen bundle djui/alias-tips
 antigen bundle MichaelAquilina/zsh-auto-notify
 
 # Apply plugins and themes
