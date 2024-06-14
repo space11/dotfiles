@@ -2,7 +2,6 @@ local M = {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-    -- { "ThePrimeagen/refactoring.nvim", lazy = true },
     {
       "LukasPietzschmann/telescope-tabs",
     },
@@ -21,7 +20,6 @@ function M.config()
   wk.register {
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
     ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    -- ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
     ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
     ["<leader>ft"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
@@ -29,27 +27,26 @@ function M.config()
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
     ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
     ["<leader>fs"] = { "<cmd>Telescope  lsp_document_symbols<cr>", "LSP Document Symbols" },
-    ["<C-t>"] = {
+    ["<leader>tt"] = {
       function()
         require("telescope-tabs").list_tabs()
       end,
       "Telescope Tabs",
       mode = { "n" },
     },
-    -- ["<leader>rr"] = {
-    --   function()
-    --     require("telescope").extensions.refactoring.refactors()
-    --   end,
-    --   "Refactor",
-    --   mode = { "x" },
-    -- },
   }
 
   local icons = require "space.icons"
   local actions = require "telescope.actions"
   -- TODO: check can this work with fzf?
   -- local lga_actions = require "telescope-live-grep-args.actions"
-
+  local widthFn = function(_, cols, _)
+    if cols > 200 then
+      return 170
+    else
+      return math.floor(cols * 0.87)
+    end
+  end
   require("telescope").setup {
     defaults = {
       prompt_prefix = icons.ui.Telescope .. " ",
@@ -70,7 +67,15 @@ function M.config()
         "--hidden",
         "--glob=!.git/",
       },
-
+      layout_strategy = "center",
+      layout_config = {
+        vertical = {
+          width = 0.9,
+          height = 0.9,
+          preview_height = 0.6,
+          preview_cutoff = 0,
+        },
+      },
       mappings = {
         i = {
           ["<C-n>"] = actions.cycle_history_next,
@@ -90,23 +95,51 @@ function M.config()
     },
     pickers = {
       live_grep = {
-        theme = "dropdown",
+        theme = "dropdown", -- Optional, for a dropdown appearance
+        layout_config = {
+          width = widthFn,
+        },
+        -- layout_strategy = "center", -- Use the "center" layout strategy
       },
 
       grep_string = {
         theme = "dropdown",
       },
 
+      help_tags = {
+        theme = "dropdown",
+        previewer = true,
+        hidden = true,
+        layout_config = {
+          width = widthFn,
+        },
+      },
+
       find_files = {
         theme = "dropdown",
         previewer = true,
         hidden = true,
+        layout_config = {
+          width = widthFn,
+        },
+      },
+
+      oldfiles = {
+        theme = "dropdown",
+        previewer = true,
+        hidden = true,
+        layout_config = {
+          width = widthFn,
+        },
       },
 
       buffers = {
         theme = "dropdown",
         previewer = false,
         initial_mode = "normal",
+        layout_config = {
+          width = widthFn,
+        },
         mappings = {
           i = {
             ["<C-d>"] = actions.delete_buffer,
@@ -139,11 +172,23 @@ function M.config()
       lsp_declarations = {
         theme = "dropdown",
         initial_mode = "normal",
+        layout_config = {
+          width = widthFn,
+        },
       },
 
       lsp_implementations = {
         theme = "dropdown",
         initial_mode = "normal",
+      },
+
+      lsp_document_symbols = {
+
+        theme = "dropdown",
+        initial_mode = "normal",
+        layout_config = {
+          width = widthFn,
+        },
       },
     },
     extensions = {
