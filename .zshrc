@@ -179,3 +179,6 @@ export NODE_OPTIONS="--max-old-space-size=8192"
 
 # Nvim built from sources path
 export PATH="$HOME/neovim/bin:$PATH"
+
+export EDITOR="nv"
+export VISUAL="nv"

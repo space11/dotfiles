@@ -185,7 +185,7 @@ function M.config()
       lsp_document_symbols = {
 
         theme = "dropdown",
-        initial_mode = "normal",
+        initial_mode = "insert",
         layout_config = {
           width = widthFn,
         },

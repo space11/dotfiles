@@ -57,3 +57,8 @@ vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2
 
 vim.diagnostic.config { source = true }
+
+-- fold options
+vim.wo.foldmethod = 'syntax'
+vim.wo.foldenable = false
+vim.wo.foldlevel = 99
