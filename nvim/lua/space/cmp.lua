@@ -166,7 +166,7 @@ function M.config()
     window = {
       completion = {
         border = "rounded",
-        scrollbar = false,
+      scrollbar = false,
       },
       documentation = {
         border = "rounded",
