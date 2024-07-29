@@ -15,7 +15,7 @@ local M = {
 function M.config()
   local wk = require "which-key"
   wk.register {
-    ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
+    ["<leader><space>"] = { "<cmd>Telescope buffers previewer=true<cr>", "Find" },
     ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     ["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
     ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
@@ -28,6 +28,7 @@ function M.config()
 
   local icons = require "space.icons"
   local actions = require "telescope.actions"
+  local custom_pickers = require "space.telescope_custom_pickers"
   -- TODO: check can this work with fzf?
   -- local lga_actions = require "telescope-live-grep-args.actions"
   local widthFn = function(_, cols, _)
@@ -88,6 +89,14 @@ function M.config()
         theme = "dropdown", -- Optional, for a dropdown appearance
         layout_config = {
           width = widthFn,
+        },
+        path_display = { "truncate" },
+        -- path_display = { "shorten" },
+        mappings = {
+          i = {
+            ["<c-f>"] = custom_pickers.actions.set_extension,
+            ["<c-l>"] = custom_pickers.actions.set_folders,
+          },
         },
         -- layout_strategy = "center", -- Use the "center" layout strategy
       },

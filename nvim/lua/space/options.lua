@@ -59,6 +59,6 @@ vim.g.netrw_mouse = 2
 vim.diagnostic.config { source = true }
 
 -- fold options
-vim.wo.foldmethod = 'syntax'
+vim.wo.foldmethod = 'indent'
 vim.wo.foldenable = false
 vim.wo.foldlevel = 99

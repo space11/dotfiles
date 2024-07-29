@@ -11,7 +11,7 @@ return {
     local wk = require "which-key"
 
     wk.register {
-      ["<leader>xx"] = { function() require("trouble").toggle() end, "Trouble Toggle", },
+      ["<leader>xx"] = { function() require("trouble").toggle("diagnostics") end, "Trouble Toggle", },
       ["<leader>xw"] = { function() require("trouble").toggle "workspace_diagnostics" end, "Trouble Workspace Diagnostics", },
       ["<leader>xd"] = { function() require("trouble").togglel "document_diagnostics" end, "Trouble Document Diagnostics", },
       ["<leader>xq"] = { function() require("trouble").toggle "quickfix" end, "Trouble Quickfix", },

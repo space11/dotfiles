@@ -40,6 +40,9 @@ local M = {
     {
       "hrsh7th/cmp-nvim-lua",
     },
+    {
+      "lukas-reineke/cmp-under-comparator",
+    },
   },
 }
 
@@ -158,6 +161,16 @@ function M.config()
       { name = "calc" },
       { name = "emoji" },
       { name = "nvim_lsp_signature_help" },
+    },
+    sorting = {
+      comparators = {
+        cmp.config.compare.offset,
+        cmp.config.compare.exact,
+        cmp.config.compare.score,
+        cmp.config.compare.recently_used,
+        require("cmp-under-comparator").under,
+        cmp.config.compare.kind,
+      },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,

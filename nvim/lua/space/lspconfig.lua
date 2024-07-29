@@ -152,15 +152,8 @@ function M.config()
       }
     end
 
-    if server == "html" then
-      opts.html = {
-        filetypes = { "html", "templ" },
-      }
-    end
-
     if server == "htmx" then
       opts.htmx = {
-        -- filetypes = { "html", "templ" },
         filetypes = { "templ" },
       }
     end
@@ -178,6 +171,12 @@ function M.config()
   -- Setup angularls separately
   lspconfig.angularls.setup {
     filetypes = { "typescript", "typescriptreact", "angular.html" },
+    on_attach = M.on_attach,
+    capabilities = common_capabilities(),
+  }
+  -- Setup angularls separately
+  lspconfig.html.setup {
+    filetypes = { "templ", "react", "html", "angular.html" },
     on_attach = M.on_attach,
     capabilities = common_capabilities(),
   }
