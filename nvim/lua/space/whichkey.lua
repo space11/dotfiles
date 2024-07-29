@@ -4,31 +4,6 @@ local M = {
 }
 
 function M.config()
-  local mappings = {
-    -- q = { "<cmd>confirm q<CR>", "Quit" },
-    h = { "<cmd>nohlsearch<CR>", "NOHL" },
-    ["`"] = { "<cmd>tabnew | terminal<CR>", "Term" },
-    v = { "<cmd>vsplit<CR>", "Vertical Split" },
-    s = { "<cmd>split<CR>", "Horizontal Split" },
-    x = { name = "Trouble" },
-    b = { name = "Buffers" },
-    d = { name = "Debug" },
-    f = { name = "Find" },
-    g = { name = "Git" },
-    l = { name = "LSP" },
-    p = { name = "Plugins" },
-    -- t = { name = "Test" },
-    t = {
-      name = "Tab",
-      n = { "<cmd>$tabnew<cr>", "New Empty Tab" },
-      N = { "<cmd>tabnew %<cr>", "New Tab" },
-      o = { "<cmd>tabonly<cr>", "Only" },
-      h = { "<cmd>-tabmove<cr>", "Move Left" },
-      l = { "<cmd>+tabmove<cr>", "Move Right" },
-    },
-    -- T = { name = "Treesitter" },
-  }
-
   local which_key = require "which-key"
   which_key.setup {
     plugins = {
@@ -42,7 +17,7 @@ function M.config()
         operators = true,
         motions = true,
         text_objects = true,
-        windows = true,
+        win = true,
         nav = true,
         z = true,
         g = true,
@@ -53,12 +28,14 @@ function M.config()
       separator = "➜", -- symbol used between a key and it's label
       group = "+", -- symbol prepended to a group
     },
-    window = {
-      border = "rounded",
-      position = "bottom",
-      padding = { 2, 2, 2, 2 },
-    },
-    ignore_missing = true,
+    -- TODO check opts.win
+    -- window = {
+    --   border = "rounded",
+    --   position = "bottom",
+    --   padding = { 2, 2, 2, 2 },
+    -- },
+    -- TODO: check opts.filter
+    -- ignore_missing = true,
     show_help = true,
     show_keys = true,
     disable = {
@@ -72,7 +49,26 @@ function M.config()
     prefix = "<leader>",
   }
 
-  which_key.register(mappings, opts)
+  which_key.add {
+    { "<leader>`", "<cmd>tabnew | terminal<CR>", desc = "Term" },
+    { "<leader>b", group = "Buffers" },
+    { "<leader>d", group = "Debug" },
+    { "<leader>f", group = "Find" },
+    { "<leader>g", group = "Git" },
+    { "<leader>h", "<cmd>nohlsearch<CR>", desc = "NOHL" },
+    { "<leader>l", group = "LSP" },
+    { "<leader>p", group = "Plugins" },
+    { "<leader>s", "<cmd>split<CR>", desc = "Horizontal Split" },
+    { "<leader>t", group = "Tab" },
+    { "<leader>tN", "<cmd>tabnew %<cr>", desc = "New Tab" },
+    { "<leader>th", "<cmd>-tabmove<cr>", desc = "Move Left" },
+    { "<leader>tl", "<cmd>+tabmove<cr>", desc = "Move Right" },
+    { "<leader>tn", "<cmd>$tabnew<cr>", desc = "New Empty Tab" },
+    { "<leader>to", "<cmd>tabonly<cr>", desc = "Only" },
+    { "<leader>v", "<cmd>vsplit<CR>", desc = "Vertical Split" },
+    { "<leader>x", group = "Trouble" },
+  }
+  which_key.setup(opts)
 end
 
 return M

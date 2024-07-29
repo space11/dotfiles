@@ -3,11 +3,7 @@ local M = {
   event = "VeryLazy",
   config = function()
     local wk = require "which-key"
-
-    wk.register {
-      ["<leader>gs"] = { "<CMD>Git<CR>", "Git Status" },
-    }
+    wk.add { { "<leader>gs", "<CMD>Git<CR>", desc = "Git Status" } }
   end,
 }
-
 return M

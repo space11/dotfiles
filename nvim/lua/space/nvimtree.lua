@@ -5,9 +5,7 @@ local M = {
 
 function M.config()
   local wk = require "which-key"
-  wk.register {
-    ["<leader>e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
-  }
+  wk.add { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer" }
 
   local icons = require "space.icons"
 
@@ -16,7 +14,7 @@ function M.config()
     sync_root_with_cwd = true,
     view = {
       relativenumber = true,
-      adaptive_size = true
+      adaptive_size = true,
     },
     renderer = {
       add_trailing = false,
