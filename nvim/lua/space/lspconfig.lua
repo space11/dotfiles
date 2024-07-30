@@ -23,19 +23,20 @@ end
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 
-  if client.server_capabilities.inlayHintProvider then
-    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-  end
+  -- if client.server_capabilities.inlayHintProvider then
+  --   vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  -- end
 
-  if client.supports_method "textDocument/inlayHint" then
-    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-  end
+  -- if client.supports_method "textDocument/inlayHint" then
+  --   vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  -- end
+
   -- refresh codelens when buffer enters and buffer is saved
   -- InsertLeave TextChanged
-  vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePre" }, {
-    buffer = bufnr,
-    callback = vim.lsp.codelens.refresh,
-  })
+  -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePre" }, {
+  --   buffer = bufnr,
+  --   callback = vim.lsp.codelens.refresh,
+  -- })
 
   -- trigger code lens
   vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
@@ -47,21 +48,21 @@ local function common_capabilities()
   return capabilities
 end
 
-M.toggle_inlay_hints = function()
-  local bufnr = vim.api.nvim_get_current_buf()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }, { bufnr = bufnr })
-end
+-- M.toggle_inlay_hints = function()
+--   local bufnr = vim.api.nvim_get_current_buf()
+--   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }, { bufnr = bufnr })
+-- end
 
 function M.config()
   local wk = require "which-key"
 
   wk.add {
     { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
-    { "<leader>lh", "<cmd>lua require('space.lspconfig').toggle_inlay_hints()<cr>", desc = "Hints" },
+    -- { "<leader>lh", "<cmd>lua require('space.lspconfig').toggle_inlay_hints()<cr>", desc = "Hints" },
     { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info" },
     { "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "Next Diagnostic" },
     { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Prev Diagnostic" },
-    { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action" },
+    -- { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action" },
     { "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Quickfix" },
     { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
     {
