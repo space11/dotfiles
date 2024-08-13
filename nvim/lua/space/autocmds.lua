@@ -78,3 +78,15 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
     end
   end,
 })
+
+-- Create User Command to work in pair
+vim.api.nvim_create_user_command('PairMode', function()
+  if vim.opt.number:get() and vim.opt.relativenumber:get() then
+    vim.opt.relativenumber = false
+  elseif vim.opt.number:get() then
+    vim.opt.relativenumber = true
+  else
+    vim.opt.number = true
+    vim.opt.relativenumber = false
+  end
+end, { nargs = 0 })
