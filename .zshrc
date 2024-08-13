@@ -133,9 +133,9 @@ alias serve-web-pos="cd ~/Projects/Work/upco && nx serve web-pos --port 4200"
 alias serve-web-gift-cards="cd ~/Projects/Work/upco && nx serve web-gift-cards --port 4500"
 alias serve-web-ordering="cd ~/Projects/Work/upco && nx serve web-ordering --port 4400"
 
-# list grep
 alias l="ls -lahCF"
-alias lg="ls -lahCF | grep"
+# list grep case insensitive
+alias lg="ls -lahCF | grep -iF"
 # List open Ports
 alias lsp="sudo lsof -i -n -P | grep LISTEN"
 # pbcopy alias https://garywoodfine.com/use-pbcopy-on-ubuntu/
