@@ -65,12 +65,6 @@ function M.config()
     -- { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action" },
     { "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Quickfix" },
     { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
-    {
-      "<leader>lf",
-      "<cmd>lua vim.lsp.buf.format({async = true, filter = function(client) return client.name ~= 'typescript-tools' end})<cr>",
-      desc = "Format",
-      mode = { "n", "v" },
-    },
     -- ["<C-h"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature" },
   }
 
@@ -93,6 +87,7 @@ function M.config()
     "tailwindcss",
     -- "angularls",
     "clangd",
+    -- "omnisharp",
   }
 
   local default_diagnostic_config = {
@@ -168,6 +163,16 @@ function M.config()
       }
     end
 
+    if server == "tsserver" then
+      opts.tsserver = {
+
+    capabilities = common_capabilities(),
+        filetypes = { "typescript", "typescriptreact" },
+        root_dir = require('lspconfig/util').root_pattern("tsconfig.json", ".git"),
+        on_attach = M.on_attach,
+      }
+    end
+
     lspconfig[server].setup(opts)
   end
 
@@ -177,11 +182,23 @@ function M.config()
     on_attach = M.on_attach,
     capabilities = common_capabilities(),
   }
-  -- Setup angularls separately
+  -- Setup html separately
   lspconfig.html.setup {
     filetypes = { "templ", "react", "html", "angular.html" },
     on_attach = M.on_attach,
     capabilities = common_capabilities(),
+  }
+
+  -- Setup omnisharp separately
+  lspconfig.omnisharp.setup {
+    capabilities = common_capabilities(),
+    cmd = { "dotnet", vim.fn.stdpath "data" .. "/mason/packages/omnisharp/libexec/OmniSharp.dll" },
+    enable_import_completion = true,
+    organize_imports_on_format = true,
+    enable_roslyn_analyzers = true,
+    root_dir = function()
+      return vim.loop.cwd() -- current working directory
+    end,
   }
 end
 
