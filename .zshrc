@@ -81,6 +81,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle joshskidmore/zsh-fzf-history-search
 antigen bundle agkozak/zsh-z
 antigen bundle MichaelAquilina/zsh-auto-notify
+antigen bundle agkozak/zsh-z
 
 # Apply plugins and themes
 antigen apply 2>&1 > /dev/null
@@ -117,6 +118,9 @@ weatherInLocation() {
   curl wttr.in/"${1:-shannon-ireland}"
 }
 
+click() {
+while sleep 10; do xdotool click 1; echo -n "."; done
+}
 # Custom aliases
 alias weather=weatherInLocation
 alias fd=fdfind
@@ -157,9 +161,10 @@ alias merge_dev='CB=`git branch --show-current` && git checkout develop && git p
 #alias nvim="nvim -u NONE"
 alias nv="nvm use 18.18.0; nvim"
 
+
 export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path:/usr/local/go/bin:/home/borys/go/bin"
-fpath=(~/.zsh.d/ $fpath)
-source $HOME/.zsh.d/z.sh
+# fpath=(~/.zsh.d/ $fpath)
+# source $HOME/.zsh.d/z.sh
 
 # bun completions
 [ -s "/home/borys/.bun/_bun" ] && source "/home/borys/.bun/_bun"
@@ -180,5 +185,6 @@ export NODE_OPTIONS="--max-old-space-size=8192"
 # Nvim built from sources path
 export PATH="$HOME/neovim/bin:$PATH"
 
-export EDITOR="nv"
-export VISUAL="nv"
+export EDITOR="vim"
+export VISUAL="vim"
+

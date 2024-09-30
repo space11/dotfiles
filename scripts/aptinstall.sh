@@ -18,14 +18,14 @@ install curl
 install git
 install htop
 install vim
-isttall build-essential
+install build-essential
 install blueman
 install pavucontrol
-install terminator
+#install terminator
 install fzf # zsh history
-install gnome-tweaks
-install gnome-shell-extension-draw-on-your-screen
+#install gnome-tweaks
+#install gnome-shell-extension-draw-on-your-screen
 install fd-find  # find replacement
-instrall gromit-mpx # Draw on Screen
-
+install gromit-mpx # Draw on Screen
+install tmux
 echo "Bye."
