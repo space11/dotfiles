@@ -20,6 +20,11 @@ local M = {
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       group = lint_augroup,
       callback = function()
+        local filename = vim.fn.expand "%:p"
+        if  filename:match('/node_modules/') ~= nil then
+          print "Skipping linting for node_modules"
+          return
+        end
         lint.try_lint()
       end,
     })

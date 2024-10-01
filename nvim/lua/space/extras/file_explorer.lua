@@ -22,6 +22,15 @@ function M.config()
     view_options = {
       -- Show files and directories that start with "."
       show_hidden = true,
+    }, 
+    columns = {
+        "permissions",
+        "size",
+        "mtime",
+      },
+    keymaps = {
+        ["g="] = "actions.preview",
+        ["&"] = "actions.open_cmdline",
     },
   }
   vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })

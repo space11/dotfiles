@@ -39,6 +39,8 @@ keymap("x", "<leader>p", [["_dP]])
 keymap({ "n", "o", "x" }, "<s-h>", "^", opts) -- first non blank character
 keymap({ "n", "o", "x" }, "<s-l>", "g_", opts) -- last non blank character
 
+keymap("n", "<c-;>", "yyp", { desc = "Duplicate current line and keep cursor row"})
+
 -- Remap for dealing with word wrap
 keymap("n", "<leader>w", ":lua vim.wo.wrap = not vim.wo.wrap<CR>", opts)
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true }) -- scroll up
