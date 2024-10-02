@@ -42,23 +42,23 @@ vim.opt.colorcolumn = "80"
 vim.opt.virtualedit = "block"
 vim.opt.inccommand = "split"
 vim.opt.fillchars = vim.opt.fillchars + "eob: "
-vim.opt.fillchars:append {
-  stl = " ",
-}
+vim.opt.fillchars:append({
+	stl = " ",
+})
 -- Work around for golden_size plugin. https://github.com/dm1try/golden_size/issues/3 , https://github.com/dm1try/golden_size/pull/5
 vim.opt.winminwidth = 15
 
-vim.opt.shortmess:append "c"
+vim.opt.shortmess:append("c")
 
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
+vim.cmd("set whichwrap+=<,>,[,],h,l")
+vim.cmd([[set iskeyword+=-]])
 
 vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2
 
-vim.diagnostic.config { source = true }
+vim.diagnostic.config({ source = true })
 
 -- fold options
-vim.wo.foldmethod = 'indent'
+vim.wo.foldmethod = "indent"
 vim.wo.foldenable = false
 vim.wo.foldlevel = 99

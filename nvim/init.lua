@@ -1,49 +1,49 @@
-require "space.extras.angular"
-require "space.launch"
-require "space.options"
-require "space.keymaps"
-require "space.autocmds"
+require("space.extras.angular")
+require("space.launch")
+require("space.options")
+require("space.keymaps")
+require("space.autocmds")
 -- spec "space.dap"
-spec "space.extras.jest"
-spec "space.extras.sg-coddy"
-spec "space.no-neck-pain"
-spec "space.trouble"
-spec "space.linting"
+spec("space.extras.jest")
+spec("space.extras.sg-coddy")
+spec("space.no_neck_pain")
+spec("space.trouble")
+spec("space.linting")
 -- spec "space.neorepl"
 -- spec "space.extras.gitlinker"
-spec "space.colorscheme"
-spec "space.devicons"
-spec "space.treesitter"
-spec "space.treesitter-textobjects"
-spec "space.nvimtree"
-spec "space.mason"
-spec "space.schemastore"
-spec "space.lspconfig"
-spec "space.cmp"
-spec "space.telescope"
-spec "space.illuminate"
-spec "space.gitsigns"
-spec "space.whichkey"
-spec "space.markdown-preview"
-spec "space.fugitive"
-spec "space.comment"
-spec "space.lualine"
-spec "space.navic"
-spec "space.breadcrumbs"
-spec "space.neotest"
-spec "space.autopairs-auto-plugins"
-spec "space.neogit"
-spec "space.alpha"
-spec "space.project"
-spec "space.indentline"
-spec "space.toggleterm"
+spec("space.colorscheme")
+spec("space.devicons")
+spec("space.treesitter")
+spec("space.treesitter-textobjects")
+spec("space.nvimtree")
+spec("space.mason")
+spec("space.schemastore")
+spec("space.lspconfig")
+spec("space.cmp")
+spec("space.telescope")
+spec("space.illuminate")
+spec("space.gitsigns")
+spec("space.whichkey")
+spec("space.markdown-preview")
+spec("space.fugitive")
+spec("space.comment")
+spec("space.lualine")
+spec("space.navic")
+spec("space.breadcrumbs")
+spec("space.neotest")
+spec("space.autopairs-auto-plugins")
+spec("space.neogit")
+spec("space.alpha")
+spec("space.project")
+spec("space.indentline")
+spec("space.toggleterm")
 -- spec "space.none-ls"
-spec "space.formatter"
-spec "space.extras.file_explorer"
-spec "space.extras.dressing"
-spec "space.extras.vim-smoothie"
-spec "space.extras.tabby"
-spec "space.extras.neotab"
-spec "space.extras.vim-eunuch"
-spec "space.compile"
-require "space.lazy"
+spec("space.formatter")
+spec("space.extras.file_explorer")
+spec("space.extras.dressing")
+spec("space.extras.vim-smoothie")
+spec("space.extras.tabby")
+spec("space.extras.neotab")
+spec("space.extras.vim-eunuch")
+spec("space.compile")
+require("space.lazy")

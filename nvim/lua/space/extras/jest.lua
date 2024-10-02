@@ -1,8 +1,8 @@
 local M = {
-  "mattkubej/jest.nvim",
-  opts = {
-    silent = false,
-  },
+	"mattkubej/jest.nvim",
+	opts = {
+		silent = false,
+	},
 }
 
 return M

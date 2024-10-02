@@ -1,10 +1,10 @@
 local M = {
-  "LunarVim/breadcrumbs.nvim",
-  event = "VeryLazy",
+	"LunarVim/breadcrumbs.nvim",
+	event = "VeryLazy",
 }
 
 function M.config()
-  require("breadcrumbs").setup()
+	require("breadcrumbs").setup()
 end
 
 return M
