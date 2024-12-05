@@ -10,7 +10,7 @@ local M = {
 		local nn = require("no-neck-pain")
 		nn.setup({
 			width = 120,
-			autocmds = { enableOnVimEnter = true },
+			-- autocmds = { enableOnVimEnter = true },
 			mappings = { enabled = true },
 			buffers = {
 				scratchPad = {

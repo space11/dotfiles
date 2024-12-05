@@ -79,7 +79,7 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle joshskidmore/zsh-fzf-history-search
-antigen bundle agkozak/zsh-z
+antigen bundle fzf
 antigen bundle MichaelAquilina/zsh-auto-notify
 antigen bundle agkozak/zsh-z
 
@@ -87,7 +87,7 @@ antigen bundle agkozak/zsh-z
 antigen apply 2>&1 > /dev/null
 
 # Tree-view for kill command completion
-zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -e -o pid,user,tty,cmd'
+# zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -e -o pid,user,tty,cmd'
 
 # Setup shell history
 HISTFILE="$HOME/.zsh_history"
@@ -110,8 +110,33 @@ setopt HIST_REDUCE_BLANKS    # Remove superfluous blanks from each command line 
 setopt HIST_FIND_NO_DUPS     # Do not display a previously found event.
 setopt HIST_EXPIRE_DUPS_FIRST # Expire a duplicate event first when trimming history.
 
+# autocompletition
+bindkey '^I'   complete-word       # tab          | complete
+bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
+# Remove forward-char widgets from ACCEPT
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#forward-char}")
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#vi-forward-char}")
+
+# Add forward-char widgets to PARTIAL_ACCEPT
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(vi-forward-char)
+
+# Add custom widget to complete partial if cursor is at end of buffer
+autosuggest_partial_wordwise () {   
+    if [[ $CURSOR -lt ${#BUFFER} && $KEYMAP != vicmd ||
+          $CURSOR -lt $((${#BUFFER} - 1)) ]]; then
+      zle forward-char
+    else
+      zle forward-word
+    fi
+}
+zle -N autosuggest_partial_wordwise 
+bindkey "^[[C" autosuggest_partial_wordwise
+
+# Add autosuggest_partial_wordwise to IGNORE
+ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(autosuggest_partial_wordwise)
 # tmux
-alias tmux="nvm use 18.18.0; TERM=screen-256color-bce tmux"
+alias tmux="nvm use 18.20.4; TERM=screen-256color-bce tmux"
 
 # My weather station 
 weatherInLocation() {
@@ -121,25 +146,38 @@ weatherInLocation() {
 click() {
 while sleep 10; do xdotool click 1; echo -n "."; done
 }
+
+# Extract Stuff
+# extract () {
+#      if [ -f $1 ] ; then
+#          case $1 in
+#              *.tar.bz2)   tar xjf $1        ;;
+#              *.tar.gz)    tar xzf $1     ;;
+#              *.bz2)       bunzip2 $1       ;;
+#              *.rar)       rar x $1     ;;
+#              *.gz)        gunzip $1     ;;
+#              *.tar)       tar xf $1        ;;
+#              *.tbz2)      tar xjf $1      ;;
+#              *.tgz)       tar xzf $1       ;;
+#              *.zip)       unzip $1     ;;
+#              *.Z)         uncompress $1  ;;
+#              *.7z)        7z x $1    ;;
+#              *)           echo "'$1' cannot be extracted via extract()" ;;
+#          esac
+#      else
+#          echo "'$1' is not a valid file"
+#      fi
+
 # Custom aliases
 alias weather=weatherInLocation
 alias fd=fdfind
 alias open=xdg-open
 alias python=python3
 
-# UpCo aliases
-alias front-upco-code="cd ~/Projects/Work && code ~/Projects/Work/web-apps-upco.code-workspace && exit 0"
-alias api-upco-code="cd ~/Projects/Work && code ~/Projects/Work/api-upco.code-workspace  && exit 0"
-alias backoffice-upco-code="cd ~/Projects/Work && code ~/Projects/Work/backoffice-upco.code-workspace  && exit 0"
-alias serve-api="cd ~/Projects/Work/upco && nx serve api"
-alias serve-backoffice="cd ~/Projects/Work/upco && nx serve backoffice-template --port 4300"
-alias serve-web-pos="cd ~/Projects/Work/upco && nx serve web-pos --port 4200"
-alias serve-web-gift-cards="cd ~/Projects/Work/upco && nx serve web-gift-cards --port 4500"
-alias serve-web-ordering="cd ~/Projects/Work/upco && nx serve web-ordering --port 4400"
-
-alias l="ls -lahCF"
+alias l="ls -AF"
+alias ll="ls -lhA"
 # list grep case insensitive
-alias lg="ls -lahCF | grep -iF"
+alias lg="ls -ahCF | grep -iF"
 # List open Ports
 alias lsp="sudo lsof -i -n -P | grep LISTEN"
 # pbcopy alias https://garywoodfine.com/use-pbcopy-on-ubuntu/
@@ -159,19 +197,10 @@ alias merge_dev='CB=`git branch --show-current` && git checkout develop && git p
 
 # neoVim without using ~/.vimrc file
 #alias nvim="nvim -u NONE"
-alias nv="nvm use 18.18.0; nvim"
+alias nv="nvm use 20.17.0; nvim"
 
 
 export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path:/usr/local/go/bin:/home/borys/go/bin"
-# fpath=(~/.zsh.d/ $fpath)
-# source $HOME/.zsh.d/z.sh
-
-# bun completions
-[ -s "/home/borys/.bun/_bun" ] && source "/home/borys/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 # rust modules
 export PATH="/home/borys/rust_modules/bin:$PATH"
@@ -188,3 +217,4 @@ export PATH="$HOME/neovim/bin:$PATH"
 export EDITOR="vim"
 export VISUAL="vim"
 
+export FZF_DEFAULT_COMMAND='fdfind --type f --hidden'

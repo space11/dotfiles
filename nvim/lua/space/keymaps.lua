@@ -65,3 +65,8 @@ keymap("n", "J", "mzJ`z")
 -- This is going to get me cancelled
 keymap("i", "<C-c>", "<Esc>")
 keymap("n", "<C-c>", "<CMD>bd<CR>", { desc = "[C]lose Actual Buffer" })
+-- Auto-indents the pasted content based on the surrounding context.
+keymap({ "n", "v" }, "p", "p\\[=`]")
+
+
+keymap("n", "<CR>", [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]], { silent = true, expr = true })
