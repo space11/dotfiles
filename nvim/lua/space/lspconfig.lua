@@ -88,6 +88,7 @@ function M.config()
     -- "angularls",
     "clangd",
     -- "omnisharp",
+    "svelte"
   }
 
   local default_diagnostic_config = {
