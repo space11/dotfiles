@@ -23,7 +23,6 @@ vim.opt.timeoutlen = 500 -- time to wait for a mapped sequence to complete (in m
 vim.opt.undofile = true -- enable persistent undo
 vim.opt.updatetime = 100 -- faster completion (4000ms default)
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 2 -- insert 2 spaces for a tab
 vim.opt.cursorline = true -- highlight the current line
@@ -43,7 +42,7 @@ vim.opt.virtualedit = "block"
 vim.opt.inccommand = "split"
 vim.opt.fillchars = vim.opt.fillchars + "eob: "
 vim.opt.fillchars:append({
-	stl = " ",
+  stl = " ",
 })
 -- Work around for golden_size plugin. https://github.com/dm1try/golden_size/issues/3 , https://github.com/dm1try/golden_size/pull/5
 vim.opt.winminwidth = 15
@@ -62,3 +61,9 @@ vim.diagnostic.config({ source = true })
 vim.wo.foldmethod = "indent"
 vim.wo.foldenable = false
 vim.wo.foldlevel = 99
+
+-- tab options - check `nvim/ftplugin/go.lua` for go specific options
+vim.opt.expandtab = true -- convert tabs to spaces
+vim.o.showbreak = "\\"
+vim.o.listchars = "multispace:---+,lead:-,trail:-,nbsp:~,tab:▏ "
+vim.o.list = true

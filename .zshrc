@@ -136,7 +136,7 @@ bindkey "^[[C" autosuggest_partial_wordwise
 # Add autosuggest_partial_wordwise to IGNORE
 ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(autosuggest_partial_wordwise)
 # tmux
-alias tmux="nvm use v22.0.0 > /dev/null; TERM=screen-256color-bce tmux"
+alias tmux="nvm use v20.17.0 > /dev/null; TERM=screen-256color-bce tmux"
 
 # Download mp3 from yt
 alias ytmp3="yt-dlp -x --audio-format mp3 -o \"%(title)s.%(ext)s\""
@@ -200,7 +200,7 @@ alias merge_dev='CB=`git branch --show-current` && git checkout develop && git p
 
 # neoVim without using ~/.vimrc file
 #alias nvim="nvim -u NONE"
-alias nv="nvm use v22.0.0 > /dev/null; nvim"
+alias nv="nvm use v20.17.0 > /dev/null; nvim"
 
 
 export PATH="$PATH:/home/borys/.dotnet/:/usr/lib/postgresql/12/bin:/usr/local/bin/path:/usr/local/go/bin:/home/borys/go/bin"
