@@ -217,8 +217,8 @@ export NODE_OPTIONS="--max-old-space-size=8192"
 # Nvim built from sources path
 export PATH="$HOME/neovim/bin:$PATH"
 
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="/home/borys/neovim/bin/nvim"
+export VISUAL="/home/borys/neovim/bin/nvim"
 
 export FZF_DEFAULT_COMMAND='fdfind --type f --hidden'
 export PATH=$PATH:/usr/local/go/bin
