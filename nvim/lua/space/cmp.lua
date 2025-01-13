@@ -49,6 +49,9 @@ local M = {
 
 function M.config()
   local cmp = require("cmp")
+
+  cmp.setup.filetype("oil", { enabled = false })
+
   local luasnip = require("luasnip")
   require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -166,7 +169,8 @@ function M.config()
         { name = "buffer", keyword_length = 5 },
         { name = "path" },
       },
-      { name = "calc" },
+      -- WTF is calc?
+      -- { name = "calc" },
       { name = "emoji" },
     },
     sorting = {
