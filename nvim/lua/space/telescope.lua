@@ -1,7 +1,15 @@
 local M = {
   "nvim-telescope/telescope.nvim",
   dependencies = {
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+    },
+    {
+      "ahmedkhalf/project.nvim",
+      event = "VeryLazy",
+    },
+
     -- TODO: check can this work with fzf?
     -- {
     --   "nvim-telescope/telescope-live-grep-args.nvim",
@@ -13,6 +21,21 @@ local M = {
 }
 
 function M.config()
+  -- Configure project_nvim plugin
+
+  require("project_nvim").setup({
+    active = true,
+    on_config_done = nil,
+    manual_mode = false,
+    detection_methods = { "pattern" },
+    patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
+    ignore_lsp = {},
+    exclude_dirs = {},
+    show_hidden = false,
+    silent_chdir = true,
+    scope_chdir = "global",
+  })
+
   local wk = require("which-key")
 
   wk.add({
@@ -25,6 +48,7 @@ function M.config()
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent File" },
     { "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "LSP Document Symbols" },
     { "<leader>ft", "<cmd>Telescope live_grep<cr>", desc = "Find Text" },
+    { "<leader>fc", "<cmd>Easypick<cr>", desc = "Git changes" },
   })
 
   local icons = require("space.icons")
@@ -164,11 +188,17 @@ function M.config()
       lsp_references = {
         theme = "dropdown",
         initial_mode = "normal",
+        layout_config = {
+          width = widthFn,
+        },
       },
 
       lsp_definitions = {
         theme = "dropdown",
         initial_mode = "normal",
+        layout_config = {
+          width = widthFn,
+        },
       },
 
       lsp_declarations = {
@@ -182,6 +212,9 @@ function M.config()
       lsp_implementations = {
         theme = "dropdown",
         initial_mode = "normal",
+        layout_config = {
+          width = widthFn,
+        },
       },
 
       lsp_document_symbols = {
@@ -213,6 +246,10 @@ function M.config()
       -- },
     },
   })
+
+  -- To get fzf loaded and working with telescope, you need to call
+  -- load_extension, somewhere after setup function:
+  require("telescope").load_extension("fzf")
 end
 
 return M

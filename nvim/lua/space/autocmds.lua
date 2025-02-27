@@ -104,3 +104,14 @@ vim.api.nvim_create_user_command("PairMode", function()
     vim.opt.relativenumber = false
   end
 end, { nargs = 0 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  callback = function()
+    if require("nvim-treesitter.parsers").has_parser() then
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    else
+      vim.opt.foldmethod = "syntax"
+    end
+  end,
+})

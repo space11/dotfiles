@@ -42,7 +42,7 @@ keymap({ "n", "o", "x" }, "<s-l>", "g_", opts) -- last non blank character
 keymap("n", "<c-;>", "yyp", { desc = "Duplicate current line and keep cursor row" })
 
 -- Remap for dealing with word wrap
-keymap("n", "<leader>w", ":lua vim.wo.wrap = not vim.wo.wrap<CR>", opts)
+keymap("n", "<leader>w", ":lua vim.wo.wrap = not vim.wo.wrap<CR>", {noremap = true, silent = true, desc = "Toggle [w]rap" })
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true }) -- scroll up
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true }) -- scroll down
 
@@ -69,4 +69,5 @@ keymap("n", "<C-c>", "<CMD>bd<CR>", { desc = "[C]lose Actual Buffer" })
 keymap({ "n", "v" }, "p", "p\\[=`]")
 
 
-keymap("n", "<CR>", [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]], { silent = true, expr = true })
+keymap("n", ";", ":", { noremap = true, silent = true })
+vim.keymap.set("n", "<CR>", [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]], { silent = true, expr = true })

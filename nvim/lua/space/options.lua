@@ -57,13 +57,17 @@ vim.g.netrw_mouse = 2
 
 vim.diagnostic.config({ source = true })
 
--- fold options
-vim.wo.foldmethod = "indent"
+-- fold options, check autocmds
 vim.wo.foldenable = false
+vim.o.foldcolumn = '1'
 vim.wo.foldlevel = 99
+
 
 -- tab options - check `nvim/ftplugin/go.lua` for go specific options
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.o.showbreak = "\\"
 vim.o.listchars = "multispace:---+,lead:-,trail:-,nbsp:~,tab:▏ "
 vim.o.list = true
+
+
+vim.api.nvim_set_hl(0, "Todo", { bg = "red"});

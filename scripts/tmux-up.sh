@@ -14,4 +14,8 @@ tmux new-window -t $session:$window -n "lazy"
 tmux send-keys -t $session "cd ~/Projects/Work/upco/" Enter
 tmux send-keys -t $session:$window "lazygit" C-m
 
+window=3
+tmux new-window -t $session:$window -n "serv"
+
 tmux attach-session -t $session
+tmux split-window -hf
