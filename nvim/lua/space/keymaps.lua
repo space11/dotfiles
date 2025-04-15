@@ -42,13 +42,28 @@ keymap({ "n", "o", "x" }, "<s-l>", "g_", opts) -- last non blank character
 keymap("n", "<c-;>", "yyp", { desc = "Duplicate current line and keep cursor row" })
 
 -- Remap for dealing with word wrap
-keymap("n", "<leader>w", ":lua vim.wo.wrap = not vim.wo.wrap<CR>", {noremap = true, silent = true, desc = "Toggle [w]rap" })
+keymap(
+  "n",
+  "<leader>w",
+  ":lua vim.wo.wrap = not vim.wo.wrap<CR>",
+  { noremap = true, silent = true, desc = "Toggle [w]rap" }
+)
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true }) -- scroll up
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true }) -- scroll down
 
 -- Diagnostic keymaps
-keymap("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-keymap("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+    vim.cmd("normal! zz")
+  end
+end
+keymap("n", "[d", diagnostic_goto(false), { desc = "Go to previous diagnostic message" })
+keymap("n", "]d", diagnostic_goto(true), { desc = "Go to next diagnostic message" })
+keymap("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Go to previous error message" })
+keymap("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Go to next error message" })
 keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 keymap("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
@@ -68,6 +83,8 @@ keymap("n", "<C-c>", "<CMD>bd<CR>", { desc = "[C]lose Actual Buffer" })
 -- Auto-indents the pasted content based on the surrounding context.
 keymap({ "n", "v" }, "p", "p\\[=`]")
 
-
 keymap("n", ";", ":", { noremap = true, silent = true })
 vim.keymap.set("n", "<CR>", [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]], { silent = true, expr = true })
+
+-- Count occurence of word under the cursor. https://vim.fandom.com/wiki/Count_number_of_matches_of_a_pattern
+keymap("n", ",*", "*<C-O>:%s///gn<CR>", { desc = "Count occurence of word under cursor" })

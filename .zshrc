@@ -222,3 +222,11 @@ export VISUAL="/home/borys/neovim/bin/nvim"
 
 export FZF_DEFAULT_COMMAND='fdfind --type f --hidden'
 export PATH=$PATH:/usr/local/go/bin
+
+# opam configuration
+[[ ! -r /home/borys/.opam/opam-init/init.zsh ]] || source /home/borys/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+
+# allow sudo to run alliases
+alias sudo='sudo '
+

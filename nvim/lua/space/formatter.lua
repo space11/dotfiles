@@ -29,6 +29,8 @@ local M = {
         css = { "prettierd", "prettier", stop_after_first = true },
         scss = { "prettierd", "prettier", stop_after_first = true },
         angular = { "prettierd", "prettier", stop_after_first = true },
+        sql = { "sql_formatter", stop_after_first = true },
+        ["*"] = { "injected" },
       },
       -- Set default options
       default_format_opts = {
