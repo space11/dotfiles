@@ -1,11 +1,13 @@
 local M = {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
+  enabled = true,
 }
 
 function M.config()
 	local which_key = require("which-key")
 	which_key.setup({
+		preset = "helix",
 		plugins = {
 			marks = true,
 			registers = true,
@@ -46,12 +48,12 @@ function M.config()
 		{ "<leader>f", group = "Find" },
 		{ "<leader>g", group = "Git" },
 		{ "<leader>s", "<cmd>split<CR>", desc = "Horizontal Split" },
-    { "<leader>v", "<cmd>vsplit<CR>", desc = "Vertical Split" },
-    { "<leader>l", group = "LSP" },
-    -- { "<leader>b", group = "Buffers" },
-    -- { "<leader>d", group = "Debug" },
-    -- { "<leader>h", "<cmd>nohlsearch<CR>", desc = "NOHL" },
-    -- { "<leader>p", group = "Plugins" },
+		{ "<leader>v", "<cmd>vsplit<CR>", desc = "Vertical Split" },
+		{ "<leader>l", group = "LSP" },
+		-- { "<leader>b", group = "Buffers" },
+		-- { "<leader>d", group = "Debug" },
+		-- { "<leader>h", "<cmd>nohlsearch<CR>", desc = "NOHL" },
+		-- { "<leader>p", group = "Plugins" },
 		-- { "<leader>t", group = "Tab" },
 		-- { "<leader>tN", "<cmd>tabnew %<cr>", desc = "New Tab" },
 		-- { "<leader>th", "<cmd>-tabmove<cr>", desc = "Move Left" },

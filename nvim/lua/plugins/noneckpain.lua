@@ -5,7 +5,7 @@ local M = {
   config = function()
     local wk = require("which-key")
     wk.add({
-      { "<leader>n", desc = "No Neck Pain", icon = "🤕" },
+      { "<leader>n", desc = "No Neck Pain", --[[ icon = "🤕" ]] },
     })
     local nn = require("no-neck-pain")
     nn.setup({
