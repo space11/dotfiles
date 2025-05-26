@@ -26,6 +26,7 @@
 -- end
 --
 -- return M
+
 return {
 	"nvim-lualine/lualine.nvim",
 	lazy = false,
