@@ -8,6 +8,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-  -- plugins go here
+-- Load all plugin specs from lua/plugins/
+require("lazy").setup("plugins", {
+  change_detection = { notify = true },
 })

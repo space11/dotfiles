@@ -1,1 +1,376 @@
-require("config.lazy")
+require("keymaps")
+require("lazy-setup")
+require("autocmds")
+require("options")
+-- vim.g.mapleader = " "
+-- vim.g.maplocalleader = " "
+--
+-- vim.opt.hidden = true
+-- vim.opt.termguicolors = true
+-- vim.opt.background = "dark"
+-- vim.opt.number = true
+-- vim.opt.relativenumber = true
+-- vim.opt.list = true
+-- vim.opt.listchars = "tab:..,trail:_,extends:>,precedes:<,nbsp:~"
+-- vim.opt.smartcase = true
+-- vim.opt.ignorecase = true
+-- vim.opt.textwidth = 80
+-- vim.opt.tabstop = 4
+-- vim.opt.softtabstop = 4
+-- vim.opt.shiftwidth = 4
+-- vim.opt.undofile = true
+-- vim.opt.backupcopy = "yes"
+-- vim.opt.wrap = true
+-- vim.opt.linebreak = true
+-- vim.opt.foldenable = false
+-- vim.opt.foldmethod = "manual"
+-- vim.opt.foldlevelstart = 99
+-- vim.opt.swapfile = false
+-- vim.opt.clipboard = vim.opt.clipboard + "unnamed,unnamedplus"
+--
+-- vim.keymap.set("n", "<leader>f", "<cmd>Files<cr>")
+-- vim.keymap.set("n", "<leader>r", "<cmd>Rg<cr>")
+-- vim.keymap.set("n", "<leader>b", "<cmd>Buffers<cr>")
+-- vim.keymap.set("n", "<leader>.", "<cmd>Oil<cr>")
+-- vim.keymap.set("n", "<leader>vrc", "<cmd>e $MYVIMRC<cr>")
+-- vim.keymap.set("ia", "dts", vim.fn.strftime("%Y-%m-%d"))
+--
+-- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- if not vim.loop.fs_stat(lazypath) then
+-- 	vim.fn.system({
+-- 		"git",
+-- 		"clone",
+-- 		"--filter=blob:none",
+-- 		"https://github.com/folke/lazy.nvim.git",
+-- 		"--branch=stable", -- latest stable release
+-- 		lazypath,
+-- 	})
+-- end
+-- vim.opt.rtp:prepend(lazypath)
+--
+-- require("lazy").setup({
+-- 	{
+-- 		"rose-pine/neovim",
+-- 		name = "rose-pine",
+-- 		lazy = false,
+-- 		priority = 1000,
+-- 		config = function()
+-- 			vim.cmd("colorscheme rose-pine")
+-- 			require("rose-pine").setup({
+-- 				variant = "dark",
+-- 			})
+-- 		end,
+-- 	},
+-- 	{
+-- 		"nvim-treesitter/nvim-treesitter",
+-- 		build = ":TSUpdate",
+-- 		config = function()
+-- 			local configs = require("nvim-treesitter.configs")
+-- 			require("nvim-treesitter.configs").setup({
+-- 				ensure_installed = {
+-- 					"c",
+-- 					"lua",
+-- 					"vim",
+-- 					"vimdoc",
+-- 					"query",
+-- 					"markdown",
+-- 					"just",
+-- 				},
+-- 				sync_install = false,
+-- 				highlight = {
+-- 					enable = true,
+-- 				},
+-- 			})
+-- 		end,
+-- 	},
+-- 	{ "nvim-treesitter/nvim-treesitter-context" },
+-- 	{
+-- 		"stevearc/oil.nvim",
+-- 		config = function()
+-- 			require("oil").setup({
+-- 				view_options = {
+-- 					show_hidden = true,
+-- 				},
+-- 			})
+-- 		end,
+-- 	},
+-- 	{
+-- 		"junegunn/fzf.vim",
+-- 		dependencies = {
+-- 			"junegunn/fzf",
+-- 		},
+-- 		config = function()
+-- 			vim.g.fzf_layout = { down = "~25%" }
+-- 			-- vim.g.fzf_preview_window = {}
+-- 		end,
+-- 	},
+-- 	{
+-- 		"vimwiki/vimwiki",
+-- 		init = function()
+-- 			vim.g.vimwiki_list = {
+-- 				{
+-- 					syntax = "markdown",
+-- 					ext = ".md",
+-- 				},
+-- 			}
+-- 			vim.g.vim_markdown_new_list_item_indent = 0
+-- 		end,
+-- 	},
+-- 	{
+-- 		"neovim/nvim-lspconfig",
+-- 		dependencies = {
+-- 			{ "williamboman/mason.nvim", build = ":MasonUpdate" },
+-- 			"williamboman/mason-lspconfig.nvim",
+-- 		},
+-- 		config = function()
+-- 			local lspconfig = require("lspconfig")
+-- 			-- rust
+-- 			lspconfig.rust_analyzer.setup({
+-- 				-- `:help lspconfig-setup`
+-- 				settings = {
+-- 					["rust-analyzer"] = {
+-- 						cargo = {
+-- 							allFeatures = true,
+-- 							targetDir = true,
+-- 						},
+-- 						imports = {
+-- 							group = {
+-- 								enable = false,
+-- 							},
+-- 						},
+-- 						completion = {
+-- 							postfix = {
+-- 								enable = false,
+-- 							},
+-- 						},
+-- 					},
+-- 				},
+-- 			})
+--
+-- 			-- python
+-- 			lspconfig.pyright.setup({})
+--
+-- 			-- javascript
+-- 			lspconfig.ts_ls.setup({
+-- 				filetypes = {
+-- 					"javascript",
+-- 					"javascriptreact",
+-- 					"javascript.jsx",
+-- 					"typescript",
+-- 					"typescriptreact",
+-- 					"typescript.tsx",
+-- 				},
+-- 			})
+--
+-- 			lspconfig.astro.setup({})
+--
+-- 			-- vuejs
+-- 			lspconfig.volar.setup({})
+--
+-- 			-- lua
+-- 			lspconfig.lua_ls.setup({
+-- 				settings = {
+-- 					Lua = {
+-- 						runtime = {
+-- 							-- Tell the language server which version of Lua you're using
+-- 							-- (most likely LuaJIT in the case of Neovim)
+-- 							version = "LuaJIT",
+-- 						},
+-- 						diagnostics = {
+-- 							-- Get the language server to recognize the `vim` global
+-- 							globals = {
+-- 								"vim",
+-- 								"require",
+-- 							},
+-- 						},
+-- 						workspace = {
+-- 							-- Make the server aware of Neovim runtime files
+-- 							library = vim.api.nvim_get_runtime_file("", true),
+-- 						},
+-- 						-- Do not send telemetry data containing a randomized but unique identifier
+-- 						telemetry = {
+-- 							enable = false,
+-- 						},
+-- 					},
+-- 				},
+-- 			})
+--
+-- 			-- yaml
+-- 			lspconfig.yamlls.setup({
+-- 				settings = {
+-- 					yaml = {
+-- 						format = {
+-- 							enable = true,
+-- 						},
+-- 					},
+-- 				},
+-- 			})
+--
+-- 			-- json
+-- 			lspconfig.jsonls.setup({})
+--
+-- 			-- bash
+-- 			lspconfig.bashls.setup({})
+--
+-- 			-- angular
+-- 			lspconfig.angularls.setup({})
+--
+-- 			-- html
+-- 			lspconfig.html.setup({})
+--
+-- 			vim.api.nvim_create_autocmd("LspAttach", {
+-- 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+-- 				callback = function(ev)
+-- 					-- Enable completion triggered by <c-x><c-o>
+-- 					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+-- 					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "Go to declaration" })
+-- 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "Go to definition" })
+-- 					vim.keymap.set("n", "gR", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename symbol" })
+-- 					vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = ev.buf, desc = "Find references" })
+-- 					vim.keymap.set(
+-- 						"n",
+-- 						"gi",
+-- 						vim.lsp.buf.implementation,
+-- 						{ buffer = ev.buf, desc = "Go to implementation" }
+-- 					)
+-- 					vim.keymap.set("n", "gh", vim.lsp.buf.hover, { buffer = ev.buf, desc = "Hover documentation" })
+-- 					vim.keymap.set(
+-- 						{ "n", "v" },
+-- 						"<leader>a",
+-- 						vim.lsp.buf.code_action,
+-- 						{ buffer = ev.buf, desc = "Code action" }
+-- 					)
+-- 					-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 					-- 	pattern = {
+-- 					-- 		"*.rs",
+-- 					-- 		"*.lua",
+-- 					-- 		"*.js",
+-- 					-- 		"*.jsx",
+-- 					-- 		"*.ts",
+-- 					-- 		"*.tsx",
+-- 					-- 		"*.vue",
+-- 					-- 		"*.yaml",
+-- 					-- 		"*.yml",
+-- 					-- 		"*.json",
+-- 					-- 		"*.mjs",
+-- 					-- 		"*.html",
+-- 					-- 		"*.astro",
+-- 					-- 		"*.py",
+-- 					-- 	},
+-- 					-- 	callback = function()
+-- 					-- 		vim.lsp.buf.format({ async = false })
+-- 					-- 	end,
+-- 					-- })
+-- 				end,
+-- 			})
+-- 		end,
+-- 	},
+-- 	{
+-- 		"saghen/blink.cmp",
+-- 		version = "1.*",
+-- 		opts = {
+-- 			keymap = {
+-- 				preset = "default",
+-- 			},
+-- 		},
+-- 		opts_extend = { "sources.default" },
+-- 	},
+-- 	{
+-- 		"nvim-lualine/lualine.nvim",
+-- 		lazy = false,
+-- 		dependencies = {
+-- 			"rose-pine/neovim",
+-- 		},
+-- 		config = function()
+-- 			require("lualine").setup({
+-- 				options = {
+-- 					theme = "rose-pine-alt",
+-- 					icons_enabled = false,
+-- 					section_separators = "",
+-- 					component_separators = "",
+-- 				},
+-- 			})
+-- 		end,
+-- 	},
+-- 	{
+-- 		"nvimtools/none-ls.nvim",
+-- 		lazy = false,
+-- 		dependencies = {
+-- 			"nvim-lua/plenary.nvim",
+-- 		},
+-- 		config = function()
+-- 			local null_ls = require("null-ls")
+-- 			null_ls.setup({
+-- 				sources = {
+-- 					null_ls.builtins.formatting.black,
+-- 				},
+-- 			})
+-- 		end,
+-- 	},
+-- 	{ "tpope/vim-commentary" },
+-- 	{ "tpope/vim-fugitive" },
+-- 	{ "tpope/vim-obsession" },
+-- 	{ "tpope/vim-repeat" },
+-- 	{
+-- 		"tpope/vim-rhubarb",
+-- 		config = function()
+-- 			vim.api.nvim_create_user_command("Browse", function(opts)
+-- 				vim.fn.system({ "xdg-open", opts.fargs[1] })
+-- 			end, { nargs = 1 })
+-- 			-- {{- if eq .work true }}
+-- 			-- vim.g.github_enterprise_urls = { "https://rbcgithub.fg.rbc.com" }
+-- 			-- {{- end }}
+-- 		end,
+-- 	},
+-- 	{ "tpope/vim-sleuth" },
+-- 	{ "tpope/vim-surround" },
+-- 	-- {{- if eq .work true }}
+-- 	-- { "github/copilot.vim" },
+-- 	-- {{- end }}
+-- 	-- TODO: not sure do I need it?
+-- 	{ "elkowar/yuck.vim" },
+-- 	{
+-- 		"folke/which-key.nvim",
+-- 		event = "VeryLazy",
+-- 		opts = {
+-- 			-- your configuration comes here
+-- 			-- or leave it empty to use the default settings
+-- 			-- refer to the configuration section below
+-- 		},
+-- 		keys = {
+-- 			{
+-- 				"<leader>?",
+-- 				function()
+-- 					require("which-key").show({ global = false })
+-- 				end,
+-- 				desc = "Buffer Local Keymaps (which-key)",
+-- 			},
+-- 		},
+-- 	},
+-- 	-- AI
+-- 	{
+-- 		"Exafunction/codeium.nvim",
+-- 		event = "InsertEnter",
+-- 		dependencies = {
+-- 			"nvim-lua/plenary.nvim",
+-- 			"hrsh7th/nvim-cmp",
+-- 		},
+-- 		config = function()
+-- 			require("codeium").setup({
+-- 				workspace_root = {
+-- 					use_lsp = true,
+-- 					find_root = nil,
+-- 					paths = {
+-- 						".bzr",
+-- 						".git",
+-- 						".hg",
+-- 						".svn",
+-- 						"_FOSSIL_",
+-- 						"package.json",
+-- 						"go.mod",
+-- 					},
+-- 				},
+-- 			})
+-- 		end,
+-- 	},
+-- })
