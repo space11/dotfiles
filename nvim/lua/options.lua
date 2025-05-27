@@ -102,5 +102,3 @@ vim.diagnostic.config({
 	},
 }) -- When using multiple diagnostic providers allows to see which one reported that.
 
--- floating window border
-vim.o.winborder = "rounded"
