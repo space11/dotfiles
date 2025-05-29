@@ -21,10 +21,11 @@ map("n", "<CR>", [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]], { silent = true
 map("n", ",*", "*<C-O>:%s///gn<CR>", { desc = "Count word occurrences" })
 
 -- Better window navigation
-map("n", "<m-h>", "<C-w>h", opts)
-map("n", "<m-j>", "<C-w>j", opts)
-map("n", "<m-k>", "<C-w>k", opts)
-map("n", "<m-l>", "<C-w>l", opts)
+map("n", "<C-h>", "<C-w>h", opts)
+map("n", "<C-j>", "<C-w>j", opts)
+map("n", "<C-k>", "<C-w>k", opts)
+map("n", "<C-l>", "<C-w>l", opts)
+-- toggle between current and previous buffer
 map("n", "<m-tab>", "<c-6>", opts)
 
 map("n", "n", "nzz", opts)
@@ -57,7 +58,7 @@ map("n", "<c-;>", "yyp", { desc = "Duplicate current line and keep cursor row" }
 -- Remap for dealing with word wrap
 map(
 	"n",
-	"<leader>w",
+	"<leader>tw",
 	":lua vim.wo.wrap = not vim.wo.wrap<CR>",
 	{ noremap = true, silent = true, desc = "Toggle [w]rap" }
 )
@@ -102,3 +103,17 @@ vim.keymap.set("n", "<CR>", [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]], { si
 
 -- Count occurence of word under the cursor. https://vim.fandom.com/wiki/Count_number_of_matches_of_a_pattern
 map("n", ",*", "*<C-O>:%s///gn<CR>", { desc = "Count occurence of word under cursor" })
+
+-- Install additional spel files in ~/.config/nvim/spell
+-- curl -O https://ftp.nluug.nl/pub/vim/runtime/spell/pl.utf-8.spl                                                                                                                                                    SIGINT   simple-config  2⬆  5✎  2+  2⚑
+-- Toggle spell check
+vim.keymap.set("n", "<leader>ts", function()
+	if vim.wo.spell then
+		vim.wo.spell = false
+		print("Spell check OFF")
+	else
+		vim.opt.spelllang = { "en_gb", "pl" }
+		vim.wo.spell = true
+		print("Spell check ON (en_gb, pl)")
+	end
+end, { desc = "Toggle [s]pell Check (en_gb + pl)" })

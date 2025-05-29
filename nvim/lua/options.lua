@@ -37,22 +37,11 @@ vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.numberwidth = 4 -- Line number column width
 vim.opt.signcolumn = "yes" -- Always show sign column
 vim.opt.wrap = false -- Don't wrap lines
-vim.opt.colorcolumn = "80" -- Show a column marker
 vim.opt.virtualedit = "block" -- Allow cursor to move in visual block
-vim.opt.title = false -- Disable window title
 vim.opt.fillchars:append({ eob = " ", stl = " " }) -- Hide end-of-buffer ~ chars-- Appearance
-vim.opt.termguicolors = true -- True color support
-vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20" -- Cursor styles
-vim.opt.cursorline = true -- Highlight current line
 vim.opt.number = true -- Line numbers
-vim.opt.relativenumber = true -- Relative line numbers
-vim.opt.numberwidth = 4 -- Line number column width
-vim.opt.signcolumn = "yes" -- Always show sign column
-vim.opt.wrap = false -- Don't wrap lines
 vim.opt.colorcolumn = "80" -- Show a column marker
-vim.opt.virtualedit = "block" -- Allow cursor to move in visual block
 vim.opt.title = false -- Disable window title
-vim.opt.fillchars:append({ eob = " ", stl = " " }) -- Hide end-of-buffer ~ chars
 
 -- Split behavior
 vim.opt.splitbelow = true -- Horizontal split below
@@ -85,7 +74,7 @@ vim.wo.foldlevel = 99
 -- vim.opt.showbreak = "\\"
 
 -- Keyword behavior
-vim.cmd([[ set iskeyword+=- ]]) -- Treat dash-connected words as one
+-- vim.cmd([[ set iskeyword+=- ]]) -- Treat dash-connected words as one
 
 -- Navigation
 vim.cmd([[ set whichwrap+=<,>,[,],h,l ]]) -- Allow arrow keys to wrap lines
@@ -100,5 +89,25 @@ vim.diagnostic.config({
 	float = {
 		border = "rounded", -- options: "single", "double", "rounded", "solid", "shadow", or a table
 	},
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.INFO] = "",
+			[vim.diagnostic.severity.HINT] = "",
+		},
+		linehl = {
+			[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+		},
+		numhl = {
+			[vim.diagnostic.severity.WARN] = "WarningMsg",
+		},
+	},
 }) -- When using multiple diagnostic providers allows to see which one reported that.
 
+-- local signs = require("icons") -- path must match your icons module
+--
+-- vim.fn.sign_define("DiagnosticSignError", { text = signs.diagnostics.BoldError, texthl = "DiagnosticSignError" })
+-- vim.fn.sign_define("DiagnosticSignWarn", { text = signs.diagnostics.BoldWarning, texthl = "DiagnosticSignWarn" })
+-- vim.fn.sign_define("DiagnosticSignHint", { text = signs.diagnostics.BoldHint, texthl = "DiagnosticSignHint" })
+-- vim.fn.sign_define("DiagnosticSignInfo", { text = signs.diagnostics.BoldInformation, texthl = "DiagnosticSignInfo" })

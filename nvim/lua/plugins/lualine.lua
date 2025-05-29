@@ -41,6 +41,13 @@ return {
 				section_separators = "",
 				component_separators = "",
 			},
+			sections = {
+				lualine_z = {
+					function()
+						return vim.wo.wrap and "󰖶 WRAP" or "󰜺 NO-WRAP"
+					end,
+				},
+			},
 		})
 	end,
 }
