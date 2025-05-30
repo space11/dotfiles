@@ -22,7 +22,6 @@ function M.config()
     [[██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║]],
     [[╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝]],
     [[                                 ]],
-    print(vim.inspect(vim.version())),
   }
 
   dashboard.section.buttons.val = {
