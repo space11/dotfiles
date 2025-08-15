@@ -10,7 +10,7 @@ local M = {
         lua = { "stylua" },
         svelte = { "prettierd", "prettier", stop_after_first = true },
         javascript = { "prettierd", "prettier", stop_after_first = true },
-        typescript = { "prettier", "prettierd", stop_after_first = true, timeout_ms = 500 },
+        typescript = { "prettier", "prettierd", stop_after_first = true },
         javascriptreact = { "prettierd", "prettier", stop_after_first = true },
         typescriptreact = { "prettierd", "prettier", stop_after_first = true },
         json = { "prettierd", "prettier", stop_after_first = true },
@@ -20,7 +20,7 @@ local M = {
         ruby = { "standardrb" },
         markdown = { "prettierd", "prettier", stop_after_first = true },
         erb = { "htmlbeautifier" },
-        html = { "htmlbeautifier" },
+        html = { "prettierd", "prettier", stop_after_first = true },
         bash = { "beautysh" },
         proto = { "buf" },
         rust = { "rustfmt" },
@@ -28,7 +28,8 @@ local M = {
         toml = { "taplo" },
         css = { "prettierd", "prettier", stop_after_first = true },
         scss = { "prettierd", "prettier", stop_after_first = true },
-        angular = { "prettierd", "prettier", stop_after_first = true },
+        ["angular.html"] = { "prettierd", "prettier", stop_after_first = true },
+        angular = { "prettier", "prettierd", stop_after_first = true },
         sql = { "sql_formatter", stop_after_first = true },
         ["*"] = { "injected" },
       },
@@ -42,7 +43,7 @@ local M = {
       conform.format({
         lsp_fallback = true,
         async = true,
-        timeout_ms = 500,
+        timeout_ms = 5000,
       })
     end, {
       desc = "Format file or range (in visual mode)",

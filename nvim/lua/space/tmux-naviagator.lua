@@ -10,11 +10,11 @@ local M = {
     "TmuxNavigatorProcessList",
   },
   keys = {
-    { "<m-h>", "<cmd>TmuxNavigateLeft<cr>" },
-    { "<m-j>", "<cmd>TmuxNavigateDown<cr>" },
-    { "<m-k>", "<cmd>TmuxNavigateUp<cr>" },
-    { "<m-l>", "<cmd>TmuxNavigateRight<cr>" },
-    { "<m-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    { "<c-h>", "<cmd>TmuxNavigateLeft<cr>" },
+    { "<c-j>", "<cmd>TmuxNavigateDown<cr>" },
+    { "<c-k>", "<cmd>TmuxNavigateUp<cr>" },
+    { "<c-l>", "<cmd>TmuxNavigateRight<cr>" },
+    { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
   },
   -- config = function()
   --   vim.g.tmux_navigator_no_mappings = 1

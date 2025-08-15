@@ -65,7 +65,8 @@ set relativenumber
 set number 
 
 " number of lines offset when jumping
-set scrolloff=2
+set scrolloff=5
+set ttyfast
 
 " Tab key enters 2 spaces
 " To enter a TAB character when `expandtab` is in effect,

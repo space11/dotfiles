@@ -3,7 +3,11 @@ local M = {
   dependencies = {
     {
       "nvim-telescope/telescope-fzf-native.nvim",
-      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+      -- build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+      build = "make",
+       config = function()
+            require("telescope").load_extension("fzf")
+          end,
     },
     {
       "ahmedkhalf/project.nvim",
@@ -31,7 +35,7 @@ function M.config()
     patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "pom.xml" },
     ignore_lsp = {},
     exclude_dirs = {},
-    show_hidden = false,
+    show_hidden = true,
     silent_chdir = true,
     scope_chdir = "global",
   })
@@ -112,6 +116,7 @@ function M.config()
     },
     pickers = {
       live_grep = {
+        no_ignore = true, -- show .env file
         theme = "dropdown", -- Optional, for a dropdown appearance
         layout_config = {
           width = widthFn,
@@ -144,6 +149,7 @@ function M.config()
         theme = "dropdown",
         previewer = true,
         hidden = true,
+        -- no_ignore = true, -- show .env file
         layout_config = {
           width = widthFn,
         },

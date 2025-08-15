@@ -51,7 +51,7 @@ vim.opt.winminwidth = 15
 vim.opt.shortmess:append("c")
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
-vim.cmd([[set iskeyword+=-]])
+vim.cmd([[set iskeyword+=$]])
 
 vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2
@@ -67,8 +67,10 @@ vim.wo.foldlevel = 99
 -- tab options - check `nvim/ftplugin/go.lua` for go specific options
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.o.showbreak = "\\"
-vim.o.listchars = "multispace:---+,lead:-,trail:-,nbsp:~,tab:▏ "
-vim.o.list = true
+-- vim.o.listchars = "multispace:---+,lead:-,trail:-,nbsp:~,tab:▏ "
+-- vim.o.listchars = "tab:»·,trail:·,extends:>,precedes:<,nbsp:␣"
+-- vim.o.listchars="tab:→ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨"
+-- vim.o.list = true
 
 
 vim.api.nvim_set_hl(0, "Todo", { bg = "red"});

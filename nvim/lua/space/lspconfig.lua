@@ -13,7 +13,7 @@ local function lsp_keymaps(bufnr)
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>zz", opts)
-  keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover({border ='rounded', max_width=80, max_height=20})<CR>", opts)
   keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
@@ -22,21 +22,6 @@ end
 
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
-
-  -- if client.server_capabilities.inlayHintProvider then
-  --   vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-  -- end
-
-  -- if client.supports_method "textDocument/inlayHint" then
-  --   vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-  -- end
-
-  -- refresh codelens when buffer enters and buffer is saved
-  -- InsertLeave TextChanged
-  -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePre" }, {
-  --   buffer = bufnr,
-  --   callback = vim.lsp.codelens.refresh,
-  -- })
 
   -- trigger code lens
   vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
@@ -47,11 +32,6 @@ local function common_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   return capabilities
 end
-
--- M.toggle_inlay_hints = function()
---   local bufnr = vim.api.nvim_get_current_buf()
---   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }, { bufnr = bufnr })
--- end
 
 function M.config()
   local wk = require("which-key")
@@ -88,17 +68,16 @@ function M.config()
     -- "angularls",
     "clangd",
     -- "omnisharp",
-    "svelte"
+    "svelte",
   }
 
-  local default_diagnostic_config = {
+  vim.diagnostic.config({
     signs = {
-      active = true,
-      values = {
-        { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-        { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-        { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-        { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+      text = {
+        [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+        [vim.diagnostic.severity.WARN] = icons.diagnostics.Warning,
+        [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+        [vim.diagnostic.severity.INFO] = icons.diagnostics.Information,
       },
     },
     virtual_text = false,
@@ -113,9 +92,7 @@ function M.config()
       header = "",
       prefix = "",
     },
-  }
-
-  vim.diagnostic.config(default_diagnostic_config)
+  })
 
   for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
@@ -151,12 +128,6 @@ function M.config()
       }
     end
 
-    -- if server == "htmx" then
-    --   opts.htmx = {
-    --     filetypes = { "templ" },
-    --   }
-    -- end
-
     if server == "tailwindcss" then
       opts.tailwindcss = {
         filetypes = { "templ", "react", "html", "angular.html" },
@@ -191,12 +162,21 @@ function M.config()
     lspconfig[server].setup(opts)
   end
 
-  -- Setup angularls separately
   lspconfig.angularls.setup({
+    cmd = {
+      vim.fn.stdpath("data") .. "/mason/bin/ngserver",
+      "--stdio",
+      "--tsProbeLocations",
+      "/Users/borysolenjniczak/Code/advocate-ui",
+      "--ngProbeLocations",
+      "/Users/borysolenjniczak/Code/advocate-ui",
+    },
+    root_dir = lspconfig.util.root_pattern("angular.json", "project.json"),
     filetypes = { "typescript", "angular.html" },
     on_attach = M.on_attach,
     capabilities = common_capabilities(),
   })
+
   -- Setup html separately
   lspconfig.html.setup({
     filetypes = { "templ", "react", "html", "angular.html" },
@@ -214,6 +194,40 @@ function M.config()
     root_dir = function()
       return vim.loop.cwd() -- current working directory
     end,
+  })
+  lspconfig.graphql.setup({
+    cmd = { "graphql-lsp", "server", "--method", "stream" },
+    filetypes = { "graphql", "typescript", "typescriptreact", "javascript" },
+    root_dir = require("lspconfig.util").root_pattern(".git", "graphql.config.yml"),
+  })
+
+  lspconfig.intelephense.setup({
+    settings = {
+      intelephense = {
+        stubs = {
+          "bcmath",
+          "bz2",
+          "calendar",
+          "Core",
+          "curl",
+          "zip",
+          "zlib",
+          "wordpress",
+          "woocommerce",
+          "acf-pro",
+          "wordpress-globals",
+          "wp-cli",
+          "genesis",
+          "polylang",
+        },
+        environment = {
+          -- includePaths = '/home/your-user/.composer/vendor/php-stubs/' -- this line forces the composer path for the stubs in case inteliphense don't find it...
+        },
+        files = {
+          maxSize = 5000000,
+        },
+      },
+    },
   })
 end
 
