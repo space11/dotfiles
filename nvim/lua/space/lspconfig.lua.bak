@@ -201,8 +201,6 @@ function M.config()
     root_dir = require("lspconfig.util").root_pattern(".git", "graphql.config.yml"),
   })
 
-  lspconfig.terraform.setup{}
-
   lspconfig.intelephense.setup({
     settings = {
       intelephense = {
