@@ -1,0 +1,9 @@
+[user]
+	name = borys-ole
+	email = borys@electica.io
+[core]
+	autocrlf = input
+[diff]
+	tool = nvimdiff
+[difftool]
+	prompt = false
