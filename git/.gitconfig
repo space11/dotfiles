@@ -11,3 +11,10 @@
 	path = ~/.gitconfig-personal
 [branch]
 	autoSetupMerge = simple
+[safe]
+	directory = /opt/homebrew
+	directory = /opt/homebrew/Library/Taps/buo/homebrew-cask-upgrade
+	directory = /opt/homebrew/Library/Taps/getsentry/homebrew-tools
+	directory = /opt/homebrew/Library/Taps/hashicorp/homebrew-tap
+	directory = /opt/homebrew/Library/Taps/jesseduffield/homebrew-lazygit
+	directory = /opt/homebrew/Library/Taps/nikitabobko/homebrew-tap
