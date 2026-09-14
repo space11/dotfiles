@@ -9,7 +9,3 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 umask 002
 
 export EDITOR="nvim"
-
-# Setting PATH for Python 3.13
-PATH="/Library/Frameworks/Python.framework/Versions/3.13/bin:${PATH}"
-export PATH
