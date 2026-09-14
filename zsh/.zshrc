@@ -17,17 +17,11 @@ setopt HIST_REDUCE_BLANKS      # collapse multiple spaces in stored commands
 fpath=("$HOME/.zfunc" $fpath)
 autoload -Uz tat
 
-# NVM lazy load (saves several hundred ms on shell startup)
+# NVM eager load (puts the active node version's bin, incl. global CLIs like
+# openspec, on PATH at shell start; lazy load only shimmed node/npm/npx)
 export NVM_DIR="$HOME/.nvm"
-nvm() {
-    unset -f nvm
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    nvm "$@"
-}
-for cmd in node npm npx; do
-    eval "$cmd() { unset -f $cmd; nvm >/dev/null; command $cmd \"\$@\"; }"
-done
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Weather forecast via wttr.in (defaults to Shannon, Co. Clare, Ireland)
 # `weather`            -> current conditions for Shannon (one line)
