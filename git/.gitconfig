@@ -7,3 +7,7 @@
 	tool = nvimdiff
 [difftool]
 	prompt = false
+[includeIf "gitdir:~/Code/personal/"]
+	path = ~/.gitconfig-personal
+[branch]
+	autoSetupMerge = simple
