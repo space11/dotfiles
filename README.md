@@ -9,12 +9,13 @@ GNU Stow-managed dotfiles. Each top-level directory is a stow package whose cont
 | `zsh`   | `.zshrc`, `.zprofile`, `.zfunc/` (autoloaded functions, e.g. `tat`) |
 | `git`   | `.gitconfig` |
 | `nvim`  | `.config/nvim/` (lazy.nvim config) |
+| `tmux`  | `.config/tmux/tmux.conf` |
 
 ## Setup on a new machine
 
 ```
 git clone https://github.com/space11/dotfiles.git ~/Code/personal/dotfiles
-cd ~/Code/personal/dotfiles && stow -t ~ zsh git nvim
+cd ~/Code/personal/dotfiles && stow -t ~ zsh git nvim tmux
 ```
 
 ## Day-to-day
