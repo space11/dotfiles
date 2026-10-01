@@ -6,6 +6,11 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  init = function()
+    vim.api.nvim_create_user_command("NewKeysList", function()
+      require("util.new_keys").show()
+    end, { desc = "Show the new nvim 0.12 keybindings" })
+  end,
   ---@type snacks.Config
   opts = {
     picker = {
@@ -52,6 +57,7 @@ return {
         { section = "header" },
         { section = "keys", gap = 1, padding = 1 },
         { footer = "nvim " .. tostring(vim.version()) },
+        require("util.new_keys").dashboard_section(),
       },
     },
     notifier = { enabled = false },

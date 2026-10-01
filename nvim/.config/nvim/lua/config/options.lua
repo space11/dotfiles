@@ -20,8 +20,6 @@ opt.smartindent = true
 
 opt.ignorecase = true
 opt.smartcase = true
-opt.incsearch = true
-opt.hlsearch = true
 
 opt.splitright = true
 opt.splitbelow = true
@@ -30,7 +28,6 @@ opt.clipboard = "unnamedplus"
 opt.mouse = "a"
 opt.undofile = true
 opt.swapfile = false
-opt.backup = false
 
 opt.updatetime = 250
 opt.timeoutlen = 400

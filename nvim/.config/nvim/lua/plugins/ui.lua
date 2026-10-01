@@ -34,6 +34,16 @@ return {
     opts = {
       preset = "modern",
       delay = 300,
+      spec = {
+        { "gr", group = "LSP" },
+        { "grn", desc = "Rename symbol" },
+        { "gra", desc = "Code action", mode = { "n", "x" } },
+        { "grr", desc = "References" },
+        { "gri", desc = "Implementation" },
+        { "grt", desc = "Type definition" },
+        { "grx", desc = "Run codelens" },
+        { "gO", desc = "Document symbols" },
+      },
     },
     keys = {
       {

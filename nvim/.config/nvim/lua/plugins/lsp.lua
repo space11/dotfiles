@@ -128,14 +128,6 @@ return {
         end
         nmap("gd", vim.lsp.buf.definition, "Go to definition")
         nmap("gD", vim.lsp.buf.declaration, "Go to declaration")
-        nmap("gi", vim.lsp.buf.implementation, "Go to implementation")
-        nmap("gr", vim.lsp.buf.references, "References")
-        nmap("K", vim.lsp.buf.hover, "Hover")
-        nmap("<leader>la", vim.lsp.buf.code_action, "Code action")
-        nmap("<leader>lr", vim.lsp.buf.rename, "Rename symbol")
-        nmap("<leader>ld", vim.diagnostic.open_float, "Line diagnostics")
-        nmap("[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, "Prev diagnostic")
-        nmap("]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, "Next diagnostic")
       end,
     })
 
@@ -146,6 +138,13 @@ return {
       update_in_insert = false,
       severity_sort = true,
       float = { border = "rounded" },
+      jump = {
+        on_jump = function(diagnostic, bufnr)
+          if diagnostic then
+            vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+          end
+        end,
+      },
     })
   end,
 }
