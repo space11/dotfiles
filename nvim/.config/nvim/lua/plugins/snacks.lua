@@ -27,7 +27,33 @@ return {
     },
     bigfile = { enabled = true },
     quickfile = { enabled = true },
-    dashboard = { enabled = false },
+    dashboard = {
+      enabled = true,
+      preset = {
+        header = [[
+███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗
+████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║
+██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║
+██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║
+██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║
+╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝]],
+        keys = {
+          { key = "f", desc = "Find file", action = function() Snacks.picker.files() end },
+          { key = "r", desc = "Recent files", action = function() Snacks.picker.recent() end },
+          { key = "g", desc = "Live grep", action = function() Snacks.picker.grep() end },
+          { key = "n", desc = "New file", action = ":ene" },
+          { key = "e", desc = "File explorer", action = ":Oil" },
+          { key = "l", desc = "Lazy", action = ":Lazy" },
+          { key = "m", desc = "Mason", action = ":Mason" },
+          { key = "q", desc = "Quit", action = ":qa" },
+        },
+      },
+      sections = {
+        { section = "header" },
+        { section = "keys", gap = 1, padding = 1 },
+        { footer = "nvim " .. tostring(vim.version()) },
+      },
+    },
     notifier = { enabled = false },
     statuscolumn = { enabled = false },
     indent = { enabled = false },

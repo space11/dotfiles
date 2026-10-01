@@ -69,7 +69,6 @@ return {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
-        { name = "codeium", group_index = 1, priority = 100 },
         { name = "nvim_lsp", group_index = 1, priority = 90 },
         { name = "luasnip", group_index = 1, priority = 80 },
         { name = "path", group_index = 2 },
@@ -82,7 +81,6 @@ return {
             luasnip = "[Snip]",
             buffer = "[Buf]",
             path = "[Path]",
-            codeium = "[AI]",
           }
           item.menu = source_labels[entry.source.name] or ("[" .. entry.source.name .. "]")
           return item

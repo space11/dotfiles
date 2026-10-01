@@ -28,6 +28,14 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("php_commentstring"),
+  pattern = "php",
+  callback = function(event)
+    vim.bo[event.buf].commentstring = "// %s"
+  end,
+})
+
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   group = augroup("last_loc"),
   callback = function(event)

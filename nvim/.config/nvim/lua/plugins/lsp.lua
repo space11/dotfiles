@@ -2,7 +2,11 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    { "williamboman/mason.nvim", config = true },
+    {
+      "williamboman/mason.nvim",
+      cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUpdate", "MasonLog" },
+      opts = { ui = { border = "rounded" } },
+    },
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "hrsh7th/cmp-nvim-lsp",
@@ -94,7 +98,6 @@ return {
       cssls = {},
     }
 
-    require("mason").setup({ ui = { border = "rounded" } })
     require("mason-lspconfig").setup({
       ensure_installed = vim.tbl_keys(servers),
       automatic_installation = true,

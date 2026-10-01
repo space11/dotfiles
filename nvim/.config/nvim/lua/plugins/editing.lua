@@ -1,14 +1,5 @@
 return {
   {
-    "numToStr/Comment.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    keys = {
-      { "gcc", mode = "n", desc = "Comment line" },
-      { "gc",  mode = { "n", "v" }, desc = "Comment toggle" },
-    },
-    opts = {},
-  },
-  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {
