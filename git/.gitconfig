@@ -18,3 +18,5 @@
 	directory = /opt/homebrew/Library/Taps/hashicorp/homebrew-tap
 	directory = /opt/homebrew/Library/Taps/jesseduffield/homebrew-lazygit
 	directory = /opt/homebrew/Library/Taps/nikitabobko/homebrew-tap
+[url "git@ssh.bitbucket.org:"]
+	insteadOf = git@bitbucket.org:
